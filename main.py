@@ -1,70 +1,62 @@
-import cv2 as cv2
-import argparse
+from matplotlib.pyplot import contour
 import numpy as np
+import cv2 as cv2
+import time
+import copy as copy
 
-parser = argparse.ArgumentParser(description='This program shows how to use background subtraction methods provided by \
-                                              OpenCV. You can process both videos and images.')
-parser.add_argument('--input', type=str, help='Path to a video or a sequence of image.', default='fish_tank.mp4')
-parser.add_argument('--ke', type=str, help='Erosion Kernel Size.', default='5')
-parser.add_argument('--kd', type=str, help='Dilation Kernel Size.', default='11')
-parser.add_argument('--a', type=str, help='Learning Rate.', default='-1')
-args = parser.parse_args()
-  
-resize_value = 2
-  
-capture = cv2.VideoCapture(cv.samples.findFileOrKeep(args.input))
-if not capture.isOpened:
-    print('Unable to open: ' + args.input)
-    exit(0)
-    
-# GMM BS #
-backSub01 = cv2.createBackgroundSubtractorMOG2(detectShadows=False)
-    
-kernel_erosion = np.ones((int(args.ke), int(args.ke)), np.uint8)
-kernel_dilation = np.ones((int(args.kd), int(args.kd)), np.uint8)
+from contour_tracing import ContourTracing
 
-count = 0
 
-# loop through each frame    
-while True:
-    ret, frame = capture.read()
-    if frame is None:
-        break
-    
-    height, width, layers = frame.shape
+def main():
+
+    original_image = cv2.imread("datasets/DeepFish/Segmentation/images/valid/7623_F2_f000320.jpg")
+    image = cv2.imread("datasets/DeepFish/Segmentation/masks/valid/7623_F2_f000320.png")
+    # image = cv2.imread("datasets/Ga5Pe.png")
+    resize_value = 2
+    height, width, layers = image.shape
     new_h = height / resize_value
     new_w = width / resize_value
-    frame = cv2.resize(frame, (int(new_w), int(new_h)))
-    
-    fg = backSub01.apply(frame, learningRate = int(args.a))
-    
-    gaussian_blur = cv2.GaussianBlur(frame,(5,5),0)
-    fg_gaussian= backSub01.apply(gaussian_blur, learningRate = int(args.a))
-    
-    erosion = cv2.erode(fg_gaussian, kernel_erosion, iterations = 1)
-    dilation = cv2.dilate(erosion, kernel_dilation, iterations = 1)
-    
-    contours, _ = cv2.findContours(dilation, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
+    image = cv2.resize(image, (int(new_w), int(new_h)))
+    original_image = cv2.resize(original_image, (int(new_w), int(new_h)))
+    image = cv2.cvtColor(image, cv2.COLOR_RGB2GRAY)
+
+    # i = 255  # black
+    # o = 0  # black
+    # image = np.array(
+    #     [
+    #         [o, o, o, o, o, o, o, o, o, o, o],
+    #         [o, o, o, i, i, i, i, i, o, o, o],
+    #         [o, o, i, i, i, i, i, i, i, o, o],
+    #         [o, i, i, i, i, i, i, i, i, i, o],
+    #         [o, i, i, i, o, o, o, i, i, i, o],
+    #         [o, i, i, i, o, o, o, i, i, i, o],
+    #         [o, i, i, i, o, o, o, i, i, i, o],
+    #         [o, i, i, i, i, i, i, i, i, i, o],
+    #         [o, o, i, i, i, i, i, i, i, o, o],
+    #         [o, o, o, i, i, i, i, i, o, o, o],
+    #         [o, o, o, o, o, o, o, o, o, o, o],
+    #     ]
+    # ).astype(np.uint8)
+
+    start_time = time.time()
+    contour_tracing = ContourTracing()
+    contours = contour_tracing.findCountourCustom(image)
+
     for cntr in contours:
-        x,y,w,h = cv2.boundingRect(cntr)
-        cv2.rectangle(frame, (x, y), (x+w, y+h), (0,255,255), 2)
-        cv2.rectangle(dilation, (x, y), (x+w, y+h), (0,255,255), 2)
-        
-    cv2.rectangle(frame, (10, 2), (100,20), (255,255,255), -1)
-    cv2.putText(frame, str(capture.get(cv2.CAP_PROP_POS_FRAMES)), (15, 15),
-               cv2.FONT_HERSHEY_SIMPLEX, 0.5 , (0,0,0))
-    
-    cv2.imshow('Frame', frame)
-    #cv.imshow('GMM', fg)
-    #cv.imshow('GMM with Gaussian Blurr', fg_gaussian)
-    #cv.imshow('GMM after Erosion', erosion)
-    cv2.imshow('GMM after Dialtion and Erosion', dilation)
-    
-    keyboard = cv2.waitKey(0)
-    if keyboard == 27:
-        break
-    
-    count += 1
-  
-capture.release()
-cv2.destroyAllWindows()
+        x, y, w, h = cv2.boundingRect(cntr)
+        cv2.rectangle(original_image, (x, y), (x + w, y + h), (0, 255, 255), 1)
+    print("--- %s seconds ---" % (time.time() - start_time))
+
+    start_time_alternate = time.time()
+    contours, _ = cv2.findContours(image, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_NONE)
+    print("--- %s seconds ---" % (time.time() - start_time_alternate))
+
+    h, w = image.shape
+    cv2.imshow(f"Original Image ({w}, {h})", original_image)
+    cv2.imshow(f"Mask ({w}, {h})", image)
+    cv2.waitKey(0)
+    cv2.destroyAllWindows()
+
+
+if __name__ == "__main__":
+    main()
