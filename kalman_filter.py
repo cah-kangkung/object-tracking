@@ -4,7 +4,6 @@ import matplotlib.pyplot as plt
 
 class KalmanFilter(object):
     def __init__(self, dt, accel_x, accel_y):
-        super(KalmanFilter, self).__init__()
 
         self.dt = dt
 
@@ -44,11 +43,12 @@ class KalmanFilter(object):
         # Predict state
         self.x = np.dot(self.F, self.x) + np.dot(self.B, self.u)
 
-        # Update state cov matrix
+        # Predict state cov matrix
         self.P = np.dot(np.dot(self.F, self.P), self.F.T) + self.Q
         return self.x
 
     def update(self, z):
+        print(z.shape)
         # Residual
         y = z - np.dot(self.H, self.x)
 

@@ -1,16 +1,10 @@
-# -*- coding: utf-8 -*-
-"""
-Created on Fri Jul  1 20:14:44 2022
-
-@author: Kangkung
-"""
 import numpy as np
 import copy as copy
 
 
 class ContourTracing(object):
     def __init__(self):
-        super(ContourTracing, self).__init__()
+        pass
 
     def move_pointer(self, direction, i, j):
         """
@@ -211,6 +205,8 @@ class ContourTracing(object):
         LNBD = 0
         for i in range(1, rows - 1):
             for j in range(1, cols - 1):
+                if padded_image[i][j] > 0 and padded_image[i][j] < 255:
+                    print("pixel[" + str(i) + ", " + str(j) + "] = " + str(padded_image[i][j]))
 
                 # Check if pixel is a starting point or not
                 if padded_image[i][j] == 255 and padded_image[i][j - 1] == 0:
