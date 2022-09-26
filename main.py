@@ -1,11 +1,24 @@
 import copy as copy
+from pprint import pprint
 import cv2 as cv2
 from detector import Detector
 from contour_tracing import ContourTracing
+from kalman_filter import KalmanFilter
 from tracker import Tracker
+import json
 
 
 def main():
+    type = 3
+    if type == 1:
+        mainProgram()
+    elif type == 2:
+        contour_tracing()
+    elif type == 3:
+        kalman_filter()
+        
+
+def mainProgram():
     # Input
     video_path = "datasets/fish_tank_02.mp4"
     kernel_erosion_size = 0
@@ -82,6 +95,9 @@ def contour_tracing():
     cv2.waitKey(0)
     cv2.destroyAllWindows()
 
+def kalman_filter():
+    kf = KalmanFilter(1)
+    pprint(kf.__dict__)
 
 if __name__ == "__main__":
-    contour_tracing()
+    main()

@@ -3,7 +3,7 @@ import matplotlib.pyplot as plt
 
 
 class KalmanFilter(object):
-    def __init__(self, dt, accel_x, accel_y):
+    def __init__(self, dt):
 
         self.dt = dt
 
@@ -23,21 +23,26 @@ class KalmanFilter(object):
                 [0, 0, 0, 0, 0, 1],
             ]
         )
-
+        
+        # Unused
         # Control vector, constant acceleration for x and y
-        self.u = np.matrix([[accel_x], [accel_y]])
+        # self.u = np.matrix([[accel_x], [accel_y]])
 
+        # Unused
         # Control transition matrix
-        self.B = np.matrix([[self.dt ** 2 / 2, 0], [0, self.dt ** 2 / 2], [0, 0], [0, 0], [self.dt, 0], [0, self.dt],])
+        # self.B = np.matrix([[self.dt ** 2 / 2, 0], [0, self.dt ** 2 / 2], [0, 0], [0, 0], [self.dt, 0], [0, self.dt],])
+        
+        # Measurement matrix or (x, y) coordinate of detection
+        self.z = np.matrix([[0], [0]])
 
+        # Measurement transition matrix
+        self.H = np.eye(self.z.shape[0], self.F.shape[1])
+        
         # The error covariance matrix that is Identity for initial value.
         self.P = np.eye(self.F.shape[1])
 
-        # Measurement transition matrix
-        self.H = np.matrix([[1, 0, 0, 0, 0, 0], [0, 1, 0, 0, 0, 0], [0, 0, 1, 0, 0, 0], [0, 0, 0, 1, 0, 0],])
-
         self.Q = np.eye(self.F.shape[1])
-        self.R = np.eye(4)
+        self.R = np.eye(2)
 
     def predict(self):
         # Predict state

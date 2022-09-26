@@ -26,8 +26,8 @@ class Detector(object):
         cv2.imshow("Thresholded", thresh)
 
         # Find contours
-        contours = self.contour_tracing.findCountourCustom(thresh)
-        # contours, _ = cv2.findContours(thresh, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_NONE)
+        # contours = self.contour_tracing.findCountourCustom(thresh)
+        contours, _ = cv2.findContours(thresh, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_NONE)
 
         # Find centers for each contour / object
         centers = []
