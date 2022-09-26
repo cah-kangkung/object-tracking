@@ -22,23 +22,27 @@ class Detector(object):
         morphed = self.morph(fg_mask, kernel_erosion, kernel_dilation)
 
         # Thresholding
-        ret, thresh = cv2.threshold(morphed, 0, 255, 0)
-        cv2.imshow("Thresholded", thresh)
+        # ret, thresh = cv2.threshold(morphed, 0, 255, 0)
+        # cv2.imshow("Thresholded", thresh)
 
         # Find contours
         # contours = self.contour_tracing.findCountourCustom(thresh)
-        contours, _ = cv2.findContours(thresh, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_NONE)
+        contours, _ = cv2.findContours(morphed, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_NONE)
 
-        # Find centers for each contour / object
-        centers = []
+        # Find centers, width, and height for each contour / object
+        detections = []
         for contour in contours:
             M = cv2.moments(contour)
             cX = int(M["m10"] / M["m00"])
             cY = int(M["m01"] / M["m00"])
-            center_coordinate = np.array([[cX], [cY], [0], [0]])
-            centers.append(np.round(center_coordinate))
+            x, y, w, h = cv2.boundingRect(contour)
 
-        return centers, contours, thresh
+            detection = np.array([[cX], [cY], [w], [h]])
+            detections.append(np.round(detection))
+
+            cv2.rectangle(frame, (x, y), (x + w, y + h), (0, 255, 255), 2)
+
+        return detections, contours
 
     def morph(self, fg_mask, kernel_erosion, kernel_dilation):
         erosion = cv2.erode(fg_mask, kernel_erosion, iterations=1)
