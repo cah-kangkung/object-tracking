@@ -1,4 +1,3 @@
-from pprint import pprint
 from kalman_filter import KalmanFilter
 from scipy.optimize import linear_sum_assignment
 import numpy as np
@@ -52,7 +51,6 @@ class Tracker(object):
                 self.tracks[i].prediction = self.tracks[i].KF.update(detections[assignment[i]])
             else:
                 self.tracks[i].prediction = self.tracks[i].KF.update(np.array([[0], [0], [0], [0]]))
-            print()
 
         for track in self.tracks:
             trackPrediction = np.array(track.prediction)

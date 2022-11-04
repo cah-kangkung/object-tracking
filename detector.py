@@ -1,4 +1,5 @@
 import cv2 as cv2
+from cv2 import log
 import numpy as np
 from contour_tracing import ContourTracing
 
@@ -47,12 +48,31 @@ class Detector(object):
     def morph(self, fg_mask, kernel_erosion, kernel_dilation):
         erosion = cv2.erode(fg_mask, kernel_erosion, iterations=1)
         cv2.imshow("Erosion", erosion)
-
         dilation = cv2.dilate(erosion, kernel_dilation, iterations=1)
         cv2.imshow("Dilation", dilation)
 
         return dilation
 
+    def downsample(self, frame, scale):
+        rows, cols, _ = frame.shape
+        new_rows = rows // scale
+        new_cols = cols // scale
+        grayed_image = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
 
-#
+        # Using opencv pyrdown which eliminate every event-numbered row and column
+        # This method already applied gaussian blurr
+        #downsampled_image = cv2.pyrDown(grayed_image) 
+
+        # Using averaging each scale pixels into 1 pixel
+        downsampled_image = np.zeros((new_rows, new_cols))
+        blurred_image = cv2.GaussianBlur(grayed_image, (5,5) ,0)
+        for i in range(0, rows - scale, scale):
+            for j in range(0, cols - scale, scale):
+                new_i = i // scale
+                new_j = j // scale
+                downsampled_image[new_i][new_j] = np.mean(blurred_image[i:i + scale, j:j + scale])
+
+        downsampled_image = downsampled_image.astype(np.uint8)
+        
+        return downsampled_image
 

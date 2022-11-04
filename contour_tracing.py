@@ -1,6 +1,6 @@
 import numpy as np
 import copy as copy
-
+import cv2 as cv2
 
 class ContourTracing(object):
     def __init__(self):
@@ -118,21 +118,21 @@ class ContourTracing(object):
 
     def border_following(self, img, start, previous):
         """
-      Tracing border of an object
-      
-      Parameters
-      ----------
-      img : number[][]
-         Image Object.
-      start : number[]
-         A pixel coordinate which border following starts from.
-      previous : number[]
-         Previous pixel coordinate of starting point.
+        Tracing border of an object
+        
+        Parameters
+        ----------
+        img : number[][]
+            Image Object.
+        start : number[]
+            A pixel coordinate which border following starts from.
+        previous : number[]
+            Previous pixel coordinate of starting point.
 
-      Returns
-      -------
-      List of coordinate for border points
-      """
+        Returns
+        -------
+        List of coordinate for border points
+        """
         pointer_one = previous
         pointer_three = start
         contour = []
@@ -141,7 +141,7 @@ class ContourTracing(object):
         count = 0
         while img[pointer_one[0]][pointer_one[1]] == 0:
             if count > 7:
-                contour.append(pointer_three)
+                contour.append(np.array([[pointer_three[1] - 1, pointer_three[0] - 1]]))
                 return contour
 
             position, next_pointer = self.next_pointer_position(pointer_one, pointer_three, 1)
@@ -169,7 +169,7 @@ class ContourTracing(object):
             # rows or i represent y-axis
             # cols or j represent x-axis
             # the coordinate are inverted because we wanted to return a set of (x, y) points, not (y, x)
-            contour.append(np.array([[nbd_coordinate[1] - 1], [nbd_coordinate[0] - 1]]))
+            contour.append(np.array([[nbd_coordinate[1] - 1, nbd_coordinate[0] - 1]]))
 
             # Step 3.5 Determine new pointer or break
             if pointer_four[0] == start[0] and pointer_four[1] == start[1]:
@@ -197,16 +197,18 @@ class ContourTracing(object):
         -------
         List of contours
         """
-        padded_image = np.pad(img, pad_width=[(1, 1), (1, 1)], mode="constant")
+        (ret, thresh2) = cv2.threshold(img, 0, 255, cv2.THRESH_BINARY)
+        padded_image = np.pad(thresh2, pad_width=[(1, 1), (1, 1)], mode="constant")
 
         rows, cols = padded_image.shape
         contours = []
 
+        jumlah = 0
         LNBD = 0
         for i in range(1, rows - 1):
             for j in range(1, cols - 1):
-                if padded_image[i][j] > 0 and padded_image[i][j] < 255:
-                    print("pixel[" + str(i) + ", " + str(j) + "] = " + str(padded_image[i][j]))
+                # if padded_image[i][j] == 255:
+                    # print("pixel[" + str(i) + ", " + str(j) + "] = " + str(padded_image[i][j]))
 
                 # Check if pixel is a starting point or not
                 if padded_image[i][j] == 255 and padded_image[i][j - 1] == 0:
@@ -220,6 +222,7 @@ class ContourTracing(object):
 
             LNBD = 0
 
+        print()
         return np.array(contours)
 
     def findCountourCustom(self, img):

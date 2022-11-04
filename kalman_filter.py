@@ -47,14 +47,14 @@ class KalmanFilter(object):
     def predict(self):
         # Predict state
         # self.x = np.dot(self.F, self.x) + np.dot(self.B, self.u)
-        print("old state\n", self.x)
+        # print("old state\n", self.x)
         self.x = np.dot(self.F, self.x)
-        print("Predicted state\n", self.x)
+        # print("Predicted state\n", self.x)
 
         # Predict state cov matrix
-        print("old cov matrix\n", self.P)
+        # print("old cov matrix\n", self.P)
         self.P = np.dot(np.dot(self.F, self.P), self.F.T) + self.Q
-        print("Predicted cov matrix\n", self.P)
+        # print("Predicted cov matrix\n", self.P)
         return self.x
 
     def update(self, z):
@@ -66,13 +66,13 @@ class KalmanFilter(object):
 
         # Update state
         self.x = np.round(self.x + np.dot(K, y))
-        print("Updated state\n", self.x)
+        # print("Updated state\n", self.x)
 
         I = np.eye(self.H.shape[1])
 
         # Update state cov matrix
         self.P = (I - K * self.H) * self.P
-        print("Updated cov matrix\n", self.P)
+        # print("Updated cov matrix\n", self.P)
 
         return self.x
 
