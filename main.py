@@ -52,25 +52,20 @@ def main():
     capture.release()
     cv2.destroyAllWindows()
 
+
 def downsampling():
-    image = cv2.imread("screenshots/original_frame_39.0.jpg")
-    detector = Detector(1, 1)
-    detector.downsample(image)
-
-    cv2.waitKey(0)
-    cv2.destroyAllWindows()
-
-def contour_tracing():
-    image = cv2.imread("datasets/sample_01.jpg")
+    file_name = "threshold_frame_39"
+    image = cv2.imread("datasets/" + file_name + ".jpg")
     cv2.imshow("Original Image", image)
 
-    scale = 2
+    scale = 8
     detector = Detector(1, 1)
     contour_tracing = ContourTracing()
 
-    downsampled_image = detector.downsample(image, scale)
+    copy_image = copy.copy(image)
+    downsampled_image = detector.downsample(copy_image, scale)
     cv2.imshow("Downsampled Image", downsampled_image)
-    gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
+    gray = cv2.cvtColor(copy_image, cv2.COLOR_BGR2GRAY)
 
     start_time_first = time.time()
     # contours_first, _ = cv2.findContours(gray, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_NONE) 
@@ -86,39 +81,66 @@ def contour_tracing():
     print("Original Image", end_time_first - start_time_first)
     print("Downsampled Image", end_time_second - start_time_second)
     print("Jumlah", len(contours_second))
-
     # Find centers, width, and height for each contour / object
     detections = []
     for contour in contours_second:
-        # print("CONTOUR")
-        # print(contour.shape)
-        # print(contour)
-        M = cv2.moments(contour)
-        cX = int(M["m10"] / M["m00"]) * scale
-        cY = int(M["m01"] / M["m00"]) * scale
+        print(len(contour))
+        print(contour)
+        if len(contour) <= 1:
+            print('single contour')
+        print("\n")
         x, y, w, h = cv2.boundingRect(contour)
         x = x * scale
         y = y * scale
         w = w * scale
         h = h * scale
+        cX = x + w // 2
+        cY = y + h // 2
 
         detection = np.array([[cX], [cY], [w], [h]])
         detections.append(np.round(detection))
 
-        cv2.rectangle(image, (x, y), (x + w, y + h), (0, 255, 255), 2)
-        # cv2.drawContours(image, [contour], -1, (0, 255, 0), 2)
-        cv2.circle(image, (cX, cY), 3, (255, 0, 0), -1)
+        cv2.rectangle(copy_image, (x, y), (x + w, y + h), (0, 255, 255), 2)
+        cv2.circle(copy_image, (cX, cY), 3, (255, 0, 0), -1)
 
+
+    string =  "scale: x" + str(scale) + ", count: " + str(len(contours_second)) + ", time: " + str(end_time_second - start_time_second)
     cv2.putText(
-        image, "time: " + str(end_time_second - start_time_second), (15, 15), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (255, 255, 255)
+        copy_image, string, (15, 15), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (255, 255, 255)
     )
 
-    cv2.imshow("Traced Image", image)
+    cv2.imshow("Traced Image", copy_image)
 
-    cv2.imwrite("screenshots/center_01_x" + str(scale) + ".jpg", image)
+    cv2.imwrite("screenshots/" + file_name + "_x" + str(scale) + ".jpg", copy_image)
     
+    scale *= 2
+
     cv2.waitKey(0)    
     cv2.destroyAllWindows()
 
+
+def contour_tracing():
+    # i = 255  # white
+    # o = 0  # black
+    # image = np.array(
+    #     [
+    #         [o, o, o, o, o, o, o, o, o, o, o],
+    #         [i, i, i, o, o, i, i, i, i, i, i],
+    #         [i, o, i, o, o, i, o, o, o, o, i],
+    #         [i, i, i, o, o, i, o, o, o, o, i],
+    #         [o, o, o, o, o, i, o, o, o, o, i],
+    #         [o, i, o, o, o, i, i, i, i, i, i],
+    #         [o, o, o, o, o, o, o, o, o, o, o],
+    #     ]
+    # ).astype(np.uint8)
+
+    image = cv2.imread("datasets/sample_01.jpg")
+    image = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
+
+    contour_tracing = ContourTracing()
+
+    contours = contour_tracing.findCountourCustom(image)
+    print(len(contours))
+
 if __name__ == "__main__":
-    contour_tracing()
+    downsampling()

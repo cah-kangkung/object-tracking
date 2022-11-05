@@ -141,9 +141,9 @@ class ContourTracing(object):
         count = 0
         while img[pointer_one[0]][pointer_one[1]] == 0:
             if count > 7:
+                img[pointer_three[0]][pointer_three[1]] = 4
                 contour.append(np.array([[pointer_three[1] - 1, pointer_three[0] - 1]]))
                 return contour
-
             position, next_pointer = self.next_pointer_position(pointer_one, pointer_three, 1)
             pointer_one = next_pointer
             count += 1
@@ -151,10 +151,8 @@ class ContourTracing(object):
         # Step 3.2
         pointer_two = copy.copy(pointer_one)
 
-        counter = 1
+        counter = 0
         while True:
-            # print('Iteration: ', counter)
-
             # Step 3.3 Move counter clockwise
             # First, move pointer one time in counter-clockwise direction
             position, next_pointer = self.next_pointer_position(pointer_two, pointer_three, 2)
@@ -165,10 +163,16 @@ class ContourTracing(object):
             pointer_four = pointer_two
 
             # Step 3.4 Assign NBD
-            nbd_coordinate = copy.copy(pointer_three)
             # rows or i represent y-axis
             # cols or j represent x-axis
             # the coordinate are inverted because we wanted to return a set of (x, y) points, not (y, x)
+            # we use 2 and 4 (-2) since we only extract outer border
+            nbd_coordinate = copy.copy(pointer_three)
+            if img[nbd_coordinate[0]][nbd_coordinate[1] + 1] == 0:
+                img[nbd_coordinate[0]][nbd_coordinate[1]] = 4
+            elif img[nbd_coordinate[0]][nbd_coordinate[1] + 1] != 0 and img[nbd_coordinate[0]][nbd_coordinate[1]] == 1:
+                img[nbd_coordinate[0]][nbd_coordinate[1]] = 2
+
             contour.append(np.array([[nbd_coordinate[1] - 1, nbd_coordinate[0] - 1]]))
 
             # Step 3.5 Determine new pointer or break
@@ -197,32 +201,25 @@ class ContourTracing(object):
         -------
         List of contours
         """
-        (ret, thresh2) = cv2.threshold(img, 0, 255, cv2.THRESH_BINARY)
+        (ret, thresh2) = cv2.threshold(img, 127, 1, cv2.THRESH_BINARY)
         padded_image = np.pad(thresh2, pad_width=[(1, 1), (1, 1)], mode="constant")
-
         rows, cols = padded_image.shape
         contours = []
 
-        jumlah = 0
         LNBD = 0
         for i in range(1, rows - 1):
             for j in range(1, cols - 1):
-                # if padded_image[i][j] == 255:
-                    # print("pixel[" + str(i) + ", " + str(j) + "] = " + str(padded_image[i][j]))
-
                 # Check if pixel is a starting point or not
-                if padded_image[i][j] == 255 and padded_image[i][j - 1] == 0:
-                    if LNBD == 0 or LNBD == 4:
+                if padded_image[i][j] == 1 and padded_image[i][j - 1] == 0:
+                    if LNBD == 4 or LNBD == 0:
                         contour = self.border_following(padded_image, [i, j], [i, j - 1])
                         contours.append(contour)
 
                 # Check LNBD
-                if padded_image[i][j] != 0:
+                if padded_image[i][j] != 1:
                     LNBD = padded_image[i][j]
-
             LNBD = 0
 
-        print()
         return np.array(contours)
 
     def findCountourCustom(self, img):
