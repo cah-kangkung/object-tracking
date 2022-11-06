@@ -140,10 +140,12 @@ class ContourTracing(object):
         # Step 3.1 Move clockwise
         count = 0
         while img[pointer_one[0]][pointer_one[1]] == 0:
+            # If the starting pixel is a single pixel dot
             if count > 7:
                 img[pointer_three[0]][pointer_three[1]] = 4
                 contour.append(np.array([[pointer_three[1] - 1, pointer_three[0] - 1]]))
-                return contour
+                return np.array(contour)
+                
             position, next_pointer = self.next_pointer_position(pointer_one, pointer_three, 1)
             pointer_one = next_pointer
             count += 1
