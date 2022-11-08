@@ -13,7 +13,7 @@ def main():
     video_path = "datasets/fish_tank_02.mp4"
     kernel_erosion_size = 5
     kernel_dilation_size = 7
-    scale = 4
+    scale = 8
 
     capture = cv2.VideoCapture(video_path)
     detector = Detector(kernel_erosion_size, kernel_dilation_size, scale)
@@ -22,14 +22,13 @@ def main():
 
     frame_count = 0
     while True:
+        start_time_first = time.time()
         ret, frame = capture.read()
         if frame is None:
             break
         frame_count += 1
 
-        # start_time_first = time.time()
         detections, contours = detector.detect(frame)
-        # end_time_first = time.time()
         
         if frame_count > skiped_frame:
             tracker.update_tracks(detections, frame)
@@ -40,7 +39,8 @@ def main():
         )
         cv2.imshow("Frame", frame)
 
-        # print(end_time_first - start_time_first)
+        end_time_first = time.time()
+        print(end_time_first - start_time_first)
         keyboard = cv2.waitKey(1)
         if keyboard == 27:
             break
@@ -57,13 +57,13 @@ def downsampling():
     image = cv2.imread("datasets/" + file_name + ".jpg")
     cv2.imshow("Original Image", image)
 
-    scale = 16
-    detector = Detector(1, 1)
+    scale = 8
+    method = "resize"
+    detector = Detector(1, 1, scale)
     contour_tracing = ContourTracing()
-
-    downsampled_image = detector.downsample(image, scale)
-    cv2.imshow("Downsampled Image", downsampled_image)
     gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
+
+    downsampled_image = detector.downsample(gray, scale, method)
 
     start_time_first = time.time()
     # contours_first, _ = cv2.findContours(gray, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_NONE) 
@@ -83,18 +83,21 @@ def downsampling():
     detections = []
     for contour in contours_second:
         x, y, w, h = cv2.boundingRect(contour)
-        x = x * scale
-        y = y * scale
-        w = w * scale
-        h = h * scale
+        upscale_x = x * scale
+        upscale_y = y * scale
+        upscale_w = w * scale
+        upscale_h = h * scale
         cX = x + w // 2
         cY = y + h // 2
+        upscale_cX = upscale_x + upscale_w // 2
+        upscale_cY = upscale_y + upscale_h // 2
 
         detection = np.array([[cX], [cY], [w], [h]])
         detections.append(np.round(detection))
 
-        cv2.rectangle(image, (x, y), (x + w, y + h), (0, 255, 255), 2)
-        cv2.circle(image, (cX, cY), 3, (255, 0, 0), -1)
+        cv2.rectangle(image, (upscale_x, upscale_y), (upscale_x + upscale_w, upscale_y + upscale_h), (0, 255, 255), 2)
+        cv2.circle(downsampled_image, (cX, cY), 1 // scale, (0, 0, 255), -1)
+        cv2.circle(image, (upscale_cX, upscale_cY), 3, (255, 0, 0), -1)
 
 
     string =  "scale: x" + str(scale) + ", count: " + str(len(contours_second)) + ", time: " + str(end_time_second - start_time_second)
@@ -102,12 +105,16 @@ def downsampling():
         image, string, (15, 15), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (255, 255, 255)
     )
 
+    cv2.imshow("Downsampled Image", downsampled_image)
     cv2.imshow("Traced Image", image)
 
-    cv2.imwrite("screenshots/" + file_name + "_x" + str(scale) + "_downsampled.jpg", downsampled_image)
-    cv2.imwrite("screenshots/" + file_name + "_x" + str(scale) + ".jpg", image)
-    
-    scale *= 2
+    if method == "pyr":
+        cv2.imwrite("screenshots/" + file_name + "_x" + str(scale) + "_downsampled.jpg", downsampled_image)
+        cv2.imwrite("screenshots/" + file_name + "_x" + str(scale) + "_original.jpg", image)
+    else:    
+        cv2.imwrite("screenshots/" + file_name + "_x" + str(scale) + "_resize_downsampled.jpg", downsampled_image)
+        cv2.imwrite("screenshots/" + file_name + "_x" + str(scale) + "_resize_original.jpg", image)
+
 
     cv2.waitKey(0)    
     cv2.destroyAllWindows()
@@ -137,4 +144,4 @@ def contour_tracing():
     print(len(contours))
 
 if __name__ == "__main__":
-    main()
+    downsampling()

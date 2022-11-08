@@ -26,11 +26,11 @@ class Detector(object):
         # Downsample
         downsampled_image = self.downsample(morphed, self.scale)
 
-        start_time_first = time.time()
+        
         # Find contours
         contours = self.contour_tracing.findCountourCustom(downsampled_image)
         # contours, _ = cv2.findContours(morphed, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_NONE)
-        end_time_first = time.time()
+       
 
         # Find centers, width, and height for each contour / object
         # Rescale to original size
@@ -50,8 +50,6 @@ class Detector(object):
             cv2.rectangle(frame, (x, y), (x + w, y + h), (0, 255, 255), 2)
             cv2.circle(frame, (cX, cY), 3, (255, 0, 0), -1)
 
-        print(end_time_first - start_time_first)
-
         return detections, contours
 
     def morph(self, fg_mask, kernel_erosion, kernel_dilation):
@@ -62,7 +60,7 @@ class Detector(object):
 
         return dilation
 
-    def downsample(self, frame, scale):
+    def downsample(self, frame, scale, mode="pyr"):
         
         times = np.sqrt(scale)
 
@@ -79,7 +77,10 @@ class Detector(object):
 
         for i in range(int(np.round(times))):
             rows, cols = frame.shape
-            frame = cv2.pyrDown(frame, dstsize=(cols // 2, rows // 2 ))
+            if mode == "pyr":
+                frame = cv2.pyrDown(frame, dstsize=(cols // 2, rows // 2 ))
+            else:
+                frame = cv2.resize(frame, dsize=(cols // 2, rows // 2 ))
         
         return frame
 
