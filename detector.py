@@ -5,12 +5,13 @@ from contour_tracing import ContourTracing
 import time 
 
 class Detector(object):
-    def __init__(self, kernel_erosion_size, kernel_dilation_size, scale):
+    def __init__(self, kernel_erosion_size, kernel_dilation_size, scale, downsampling_mode):
         self.bg_subtractor = cv2.createBackgroundSubtractorMOG2()
         self.contour_tracing = ContourTracing()
         self.kernel_erosion_size = kernel_erosion_size
         self.kernel_dilation_size = kernel_dilation_size
         self.scale = scale
+        self.downsampling_mode = downsampling_mode
 
     def detect(self, frame):
         gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
@@ -24,13 +25,10 @@ class Detector(object):
         morphed = self.morph(fg_mask, kernel_erosion, kernel_dilation)
 
         # Downsample
-        downsampled_image = self.downsample(morphed, self.scale)
-
+        downsampled_image = self.downsample(morphed, self.scale, self.downsampling_mode)
         
         # Find contours
         contours = self.contour_tracing.findCountourCustom(downsampled_image)
-        # contours, _ = cv2.findContours(morphed, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_NONE)
-       
 
         # Find centers, width, and height for each contour / object
         # Rescale to original size
@@ -60,26 +58,15 @@ class Detector(object):
 
         return dilation
 
-    def downsample(self, frame, scale, mode="pyr"):
+    def downsample(self, frame, scale, mode="resize"):
         
         times = np.sqrt(scale)
-
-        # Using averaging each scale pixels into 1 pixel
-        # downsampled_image = np.zeros((new_rows, new_cols))
-        # blurred_image = cv2.GaussianBlur(frame, (5,5) ,0)
-        # for i in range(0, rows - scale, scale):
-        #     for j in range(0, cols - scale, scale):
-        #         new_i = i // scale
-        #         new_j = j // scale
-        #         downsampled_image[new_i][new_j] = np.mean(blurred_image[i:i + scale, j:j + scale])
-
-        # downsampled_image = downsampled_image.astype(np.uint8)
 
         for i in range(int(np.round(times))):
             rows, cols = frame.shape
             if mode == "pyr":
                 frame = cv2.pyrDown(frame, dstsize=(cols // 2, rows // 2 ))
-            else:
+            elif mode == "resize":
                 frame = cv2.resize(frame, dsize=(cols // 2, rows // 2 ))
         
         return frame
