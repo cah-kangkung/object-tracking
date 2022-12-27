@@ -18,6 +18,7 @@ class Detector(object):
 
         # Subtract bg using GMM
         fg_mask = self.bg_subtractor.apply(gray)
+        cv2.imshow("GMM", fg_mask)
 
         # Remove noise using morphology
         kernel_erosion = np.ones((self.kernel_erosion_size, self.kernel_erosion_size), np.uint8)
@@ -52,9 +53,9 @@ class Detector(object):
 
     def morph(self, fg_mask, kernel_erosion, kernel_dilation):
         erosion = cv2.erode(fg_mask, kernel_erosion, iterations=1)
-        # cv2.imshow("Erosion", erosion)
+        cv2.imshow("Erosion", erosion)
         dilation = cv2.dilate(erosion, kernel_dilation, iterations=1)
-        # cv2.imshow("Dilation", dilation)
+        cv2.imshow("Dilation", dilation)
 
         return dilation
 

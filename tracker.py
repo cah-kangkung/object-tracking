@@ -9,8 +9,7 @@ class Track(object):
         self.track_id = track_id
         self.KF = KalmanFilter(1)
         self.prediction = np.asarray(prediction)  # in case of first prediction, takes the the first detection
-        self.frames_skipped = 0
-
+        self.frames_skipped = 0 # represent how many frames had pass since this track is unassigned
 
 class Tracker(object):
     def __init__(self, max_frames_to_skip):
@@ -52,37 +51,23 @@ class Tracker(object):
         for i in range(len(row_ind)):
             assignment[row_ind[i]] = col_ind[i]
 
-        # Identify tracks with no assignment
+        # Find tracks with no assignment, then acumulate the frame it hasn't been tracked
         for i in range(len(assignment)):
             if (assignment[i] == -1):
                 self.tracks[i].frames_skipped += 1
 
-         # If tracks are not detected for long time, remove them
-        deleted_tracks = []
-        for i in range(len(self.tracks)):
-            if (self.tracks[i].frames_skipped > self.max_frames_to_skip):
-                deleted_tracks.append(i)
-        if len(deleted_tracks) > 0: 
-            for index in deleted_tracks:
-                if index < len(self.tracks):
-                    del self.tracks[index]
-                    del assignment[index]
-                else:
-                    print("ERROR: index is greater than length of tracks")
+         # If tracks are not detected for a long time, remove them
+        for index, track in enumerate(self.tracks):
+            if (track.frames_skipped > self.max_frames_to_skip):
+                del self.tracks[index]
+                del assignment[index]
 
-        # Look for un_assigned detects
-        un_assigned_detects = []
+        # Find un_assigned detectetion, then start new track
         for i in range(len(detections)):
                 if i not in assignment:
-                    un_assigned_detects.append(i)
-
-        # Start new tracks
-        if(len(un_assigned_detects) != 0):
-            for i in range(len(un_assigned_detects)):
-                track = Track(detections[un_assigned_detects[i]],
-                              self.track_id)
-                self.track_id += 1
-                self.tracks.append(track)
+                    track = Track(detections[i], self.track_id)
+                    self.track_id += 1
+                    self.tracks.append(track)
 
         # Update KF
         for i in range(len(assignment)):
@@ -116,7 +101,7 @@ class Tracker(object):
                 str(track.track_id),
                 (x - int((w / 2)), y - int((h / 2))),
                 cv2.FONT_HERSHEY_SIMPLEX,
-                1,
+                0.5,
                 color,
                 2,
             )

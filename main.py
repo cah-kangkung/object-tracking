@@ -12,7 +12,7 @@ def main():
     # Input
     video_path = "datasets/fish_tank_02.mp4"
     kernel_erosion_size = 5
-    kernel_dilation_size = 7
+    kernel_dilation_size = 13
     scale = 8
     downsampling_mode = "resize"
 
@@ -33,14 +33,29 @@ def main():
         if frame_count > skiped_frame:
             tracker.update_tracks(detections, frame)
 
+        # Frame
         cv2.rectangle(frame, (10, 2), (80, 20), (255, 255, 255), -1)
         cv2.putText(
-            frame, str(capture.get(cv2.CAP_PROP_POS_FRAMES)), (15, 15), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 0, 0)
+            frame, str(capture.get(cv2.CAP_PROP_POS_FRAMES)), (13, 15), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 0, 0)
         )
+
+        # Count
         cv2.rectangle(frame, (100, 2), (130, 20), (255, 255, 255), -1)
         cv2.putText(
             frame, str(len(tracker.tracks)), (105, 15), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 0, 0)
         )
+
+        # Count
+        cv2.rectangle(frame, (150, 2), (400, 20), (255, 255, 255), -1)
+        cv2.rectangle(frame, (155, 6), (175, 16), (255, 0, 0), -1)
+        cv2.putText(
+            frame, '=current', (180, 15), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 0, 0)
+        )
+        cv2.rectangle(frame, (270, 6), (290, 16), (0, 0, 255), -1)
+        cv2.putText(
+            frame, '=KF', (295, 15), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 0, 0)
+        )
+
         cv2.imshow("Frame", frame)
 
         keyboard = cv2.waitKey(50)
