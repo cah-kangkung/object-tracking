@@ -203,7 +203,7 @@ class ContourTracing(object):
         -------
         List of contours
         """
-        (ret, thresh2) = cv2.threshold(img, 127, 1, cv2.THRESH_BINARY)
+        (ret, thresh2) = cv2.threshold(img, 127, 1, cv2.THRESH_BINARY | cv2.THRESH_OTSU)
         padded_image = np.pad(thresh2, pad_width=[(1, 1), (1, 1)], mode="constant")
         rows, cols = padded_image.shape
         contours = []

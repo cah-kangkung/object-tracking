@@ -49,7 +49,7 @@ class Detector(object):
             cv2.rectangle(frame, (x, y), (x + w, y + h), (0, 255, 255), 2)
             cv2.circle(frame, (cX, cY), 3, (255, 0, 0), -1)
 
-        return detections, contours
+        return detections, contours, morphed
 
     def morph(self, fg_mask, kernel_erosion, kernel_dilation):
         erosion = cv2.erode(fg_mask, kernel_erosion, iterations=1)
