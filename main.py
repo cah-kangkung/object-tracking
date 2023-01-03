@@ -1,19 +1,29 @@
 import copy as copy
-from pprint import pprint
-from sqlite3 import adapters
 import cv2 as cv2
 from detector import Detector
 from tracker import Tracker
 from contour_tracing import ContourTracing
 import numpy as np
 import time 
+import os
+import argparse
 
 def main():
+    parser = argparse.ArgumentParser()
+    parser.add_argument("-p", "--Path", help = "Video path")
+    parser.add_argument("-n", "--Name", help = "Video name")
+    parser.add_argument("-kes", "--KES", help = "Kernel Erosion Size")
+    parser.add_argument("-kds", "--KDS", help = "Kernel Dilation Size")
+    parser.add_argument("-ss", "--ScreenShots", help = "Frame to be saved")
+    args = parser.parse_args()
+
     # Input
-    video_path = "datasets/f4k_detection_tracking/gt_124.flv"
-    kernel_erosion_size = 3
-    kernel_dilation_size = 13
-    scale = 4
+    name = args.Name
+    video_path = args.Path
+    kernel_erosion_size = int(args.KES)
+    kernel_dilation_size = int(args.KDS)
+    screenshots = args.ScreenShots.split(',')
+    scale = 8
     downsampling_mode = "resize"
     max_frame_to_skip = 10
 
@@ -25,19 +35,22 @@ def main():
     frame_count = 0
     while True:
         ret, frame = capture.read()
+        original_frame = copy.copy(frame)
         if frame is None:
             break
         frame_count += 1
 
-        detections, contours, morphed = detector.detect(frame)
+        detections, contours, fg_mask, eroded, dilated = detector.detect(frame)
         
         if frame_count > skiped_frame:
             tracker.update_tracks(detections, frame)
 
+        current_frame = str(int(capture.get(cv2.CAP_PROP_POS_FRAMES)))
+
         # Frame
         cv2.rectangle(frame, (10, 2), (80, 20), (255, 255, 255), -1)
         cv2.putText(
-            frame, str(capture.get(cv2.CAP_PROP_POS_FRAMES)), (13, 15), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 0, 0)
+            frame, current_frame, (13, 15), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 0, 0)
         )
 
         # Count
@@ -58,14 +71,23 @@ def main():
         )
 
         cv2.imshow("Frame", frame)
-
-        keyboard = cv2.waitKey(0)
+        cv2.imshow("GMM", fg_mask)
+        cv2.imshow("Eroded", eroded)
+        cv2.imshow("Dilated", dilated)
+        
+        keyboard = cv2.waitKey(10)
         if keyboard == 27:
             break
-        elif keyboard == ord("s"):
-            cv2.imwrite("screenshots/morphed_frame_" + str(capture.get(cv2.CAP_PROP_POS_FRAMES)) + ".jpg", morphed)
-            cv2.imwrite("screenshots/original_frame_" + str(capture.get(cv2.CAP_PROP_POS_FRAMES)) + ".jpg", frame)
-        
+        elif keyboard == ord("s") or current_frame in screenshots:
+            print("FRAME SS", current_frame)
+            path_gmm_morph = f'screenshots/{name}/gmm_morph_{kernel_erosion_size}x{kernel_dilation_size}/f{current_frame}'
+            os.makedirs(path_gmm_morph, exist_ok=True)
+            cv2.imwrite(f'{path_gmm_morph}/original_frame_{current_frame}.jpg', original_frame)
+            cv2.imwrite(f'{path_gmm_morph}/gmm_frame_{current_frame}.jpg', fg_mask)
+            cv2.imwrite(f'{path_gmm_morph}/eroded_frame_{current_frame}.jpg', eroded)
+            cv2.imwrite(f'{path_gmm_morph}/dilated_frame_{current_frame}.jpg', dilated)
+            cv2.imwrite(f'{path_gmm_morph}/result_frame_{current_frame}.jpg', frame)
+            
     capture.release()
     cv2.destroyAllWindows()
 
@@ -137,4 +159,4 @@ def downsampling():
     cv2.destroyAllWindows()
 
 if __name__ == "__main__":
-    downsampling()
+    main()
