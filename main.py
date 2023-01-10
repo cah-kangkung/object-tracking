@@ -22,7 +22,9 @@ def main():
     video_path = args.Path
     kernel_erosion_size = int(args.KES)
     kernel_dilation_size = int(args.KDS)
-    screenshots = args.ScreenShots.split(',')
+    screenshots = []
+    if args.ScreenShots :
+        screenshots = args.ScreenShots.split(',')
     scale = 8
     downsampling_mode = "resize"
     max_frame_to_skip = 10
@@ -80,13 +82,13 @@ def main():
             break
         elif keyboard == ord("s") or current_frame in screenshots:
             print("FRAME SS", current_frame)
-            path_gmm_morph = f'screenshots/{name}/gmm_morph_{kernel_erosion_size}x{kernel_dilation_size}/f{current_frame}'
+            path_gmm_morph = f'screenshots/{name}/gmm_morph/f{current_frame}/{kernel_erosion_size}x{kernel_dilation_size}'
             os.makedirs(path_gmm_morph, exist_ok=True)
-            cv2.imwrite(f'{path_gmm_morph}/original_frame_{current_frame}.jpg', original_frame)
-            cv2.imwrite(f'{path_gmm_morph}/gmm_frame_{current_frame}.jpg', fg_mask)
-            cv2.imwrite(f'{path_gmm_morph}/eroded_frame_{current_frame}.jpg', eroded)
-            cv2.imwrite(f'{path_gmm_morph}/dilated_frame_{current_frame}.jpg', dilated)
-            cv2.imwrite(f'{path_gmm_morph}/result_frame_{current_frame}.jpg', frame)
+            cv2.imwrite(f'{path_gmm_morph}/{name}_original_frame{current_frame}.jpg', original_frame)
+            cv2.imwrite(f'{path_gmm_morph}/{name}_gmm_frame{current_frame}.jpg', fg_mask)
+            cv2.imwrite(f'{path_gmm_morph}/{name}_eroded_frame{current_frame}_{kernel_erosion_size}x{kernel_dilation_size}.jpg', eroded)
+            cv2.imwrite(f'{path_gmm_morph}/{name}_dilated_frame{current_frame}_{kernel_erosion_size}x{kernel_dilation_size}.jpg', dilated)
+            cv2.imwrite(f'{path_gmm_morph}/{name}_result_frame{current_frame}.jpg', frame)
             
     capture.release()
     cv2.destroyAllWindows()
