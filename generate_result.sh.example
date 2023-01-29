@@ -1,0 +1,59 @@
+python main.py -p datasets/filtered_input_video/9908-compressed.mp4 -n 9908 -s 2 -kes 3 -kds 9 -ss 120,230,290
+python main.py -p datasets/filtered_input_video/9908-compressed.mp4 -n 9908 -s 4 -kes 3 -kds 9 -ss 120,230,290
+python main.py -p datasets/filtered_input_video/9908-compressed.mp4 -n 9908 -s 8 -kes 3 -kds 9 -ss 120,230,290
+echo "9908 3x9"
+
+python main.py -p datasets/filtered_input_video/9908-compressed.mp4 -n 9908 -s 2 -kes 5 -kds 11 -ss 120,230,290
+python main.py -p datasets/filtered_input_video/9908-compressed.mp4 -n 9908 -s 4 -kes 5 -kds 11 -ss 120,230,290
+python main.py -p datasets/filtered_input_video/9908-compressed.mp4 -n 9908 -s 8 -kes 5 -kds 11 -ss 120,230,290
+echo "9908 5x11"
+
+python main.py -p datasets/filtered_input_video/9908-compressed.mp4 -n 9908 -s 2 -kes 7 -kds 13 -ss 120,230,290
+python main.py -p datasets/filtered_input_video/9908-compressed.mp4 -n 9908 -s 4 -kes 7 -kds 13 -ss 120,230,290
+python main.py -p datasets/filtered_input_video/9908-compressed.mp4 -n 9908 -s 8 -kes 7 -kds 13 -ss 120,230,290
+echo "9908 7x13"
+
+python main.py -p datasets/filtered_input_video/9866-compressed.mp4 -n 9866 -s 2 -kes 3 -kds 9 -ss 509,789,849
+python main.py -p datasets/filtered_input_video/9866-compressed.mp4 -n 9866 -s 4 -kes 3 -kds 9 -ss 509,789,849
+python main.py -p datasets/filtered_input_video/9866-compressed.mp4 -n 9866 -s 8 -kes 3 -kds 9 -ss 509,789,849
+echo "9866 3x9"
+
+python main.py -p datasets/filtered_input_video/9866-compressed.mp4 -n 9866 -s 2 -kes 5 -kds 11 -ss 509,789,849
+python main.py -p datasets/filtered_input_video/9866-compressed.mp4 -n 9866 -s 4 -kes 5 -kds 11 -ss 509,789,849
+python main.py -p datasets/filtered_input_video/9866-compressed.mp4 -n 9866 -s 8 -kes 5 -kds 11 -ss 509,789,849
+echo "9866 5x11"
+
+python main.py -p datasets/filtered_input_video/9866-compressed.mp4 -n 9866 -s 2 -kes 7 -kds 13 -ss 509,789,849
+python main.py -p datasets/filtered_input_video/9866-compressed.mp4 -n 9866 -s 4 -kes 7 -kds 13 -ss 509,789,849
+python main.py -p datasets/filtered_input_video/9866-compressed.mp4 -n 9866 -s 8 -kes 7 -kds 13 -ss 509,789,849
+echo "9866 7x17"
+
+python main.py -p datasets/filtered_input_video/gt_124_cut_online.mp4 -n gt_124 -s 2 -kes 3 -kds 9 -ss 705,1173,1191
+python main.py -p datasets/filtered_input_video/gt_124_cut_online.mp4 -n gt_124 -s 4 -kes 3 -kds 9 -ss 705,1173,1191
+python main.py -p datasets/filtered_input_video/gt_124_cut_online.mp4 -n gt_124 -s 8 -kes 3 -kds 9 -ss 705,1173,1191
+echo "gt_124 3x9"
+
+python main.py -p datasets/filtered_input_video/gt_124_cut_online.mp4 -n gt_124 -s 2 -kes 5 -kds 11 -ss 705,1173,1191
+python main.py -p datasets/filtered_input_video/gt_124_cut_online.mp4 -n gt_124 -s 4 -kes 5 -kds 11 -ss 705,1173,1191
+python main.py -p datasets/filtered_input_video/gt_124_cut_online.mp4 -n gt_124 -s 8 -kes 5 -kds 11 -ss 705,1173,1191
+echo "gt_124 5x11"
+
+python main.py -p datasets/filtered_input_video/gt_124_cut_online.mp4 -n gt_124 -s 2 -kes 7 -kds 13 -ss 705,1173,1191
+python main.py -p datasets/filtered_input_video/gt_124_cut_online.mp4 -n gt_124 -s 4 -kes 7 -kds 13 -ss 705,1173,1191
+python main.py -p datasets/filtered_input_video/gt_124_cut_online.mp4 -n gt_124 -s 8 -kes 7 -kds 13 -ss 705,1173,1191
+echo "gt_124 7x13"
+
+python main.py -p datasets/filtered_input_video/gt_116_ori.flv -n gt_116 -s 2 -kes 3 -kds 9 -ss 803,859,1144,1167
+python main.py -p datasets/filtered_input_video/gt_116_ori.flv -n gt_116 -s 4 -kes 3 -kds 9 -ss 803,859,1144,1167
+python main.py -p datasets/filtered_input_video/gt_116_ori.flv -n gt_116 -s 8 -kes 3 -kds 9 -ss 803,859,1144,1167
+echo "gt_116 3x9"
+
+python main.py -p datasets/filtered_input_video/gt_116_ori.flv -n gt_116 -s 2 -kes 5 -kds 11 -ss 803,859,1144,1167
+python main.py -p datasets/filtered_input_video/gt_116_ori.flv -n gt_116 -s 4 -kes 5 -kds 11 -ss 803,859,1144,1167
+python main.py -p datasets/filtered_input_video/gt_116_ori.flv -n gt_116 -s 8 -kes 5 -kds 11 -ss 803,859,1144,1167
+echo "gt_116 5x11"
+
+python main.py -p datasets/filtered_input_video/gt_116_ori.flv -n gt_116 -s 2 -kes 7 -kds 13 -ss 803,859,1144,1167
+python main.py -p datasets/filtered_input_video/gt_116_ori.flv -n gt_116 -s 4 -kes 7 -kds 13 -ss 803,859,1144,1167
+python main.py -p datasets/filtered_input_video/gt_116_ori.flv -n gt_116 -s 8 -kes 7 -kds 13 -ss 803,859,1144,1167
+echo "gt_116 7x13"

@@ -2,7 +2,9 @@ import cv2 as cv2
 from cv2 import log
 import numpy as np
 from contour_tracing import ContourTracing
-import time 
+import time
+import copy as copy
+
 
 class Detector(object):
     def __init__(self, kernel_erosion_size, kernel_dilation_size, scale, downsampling_mode):
@@ -24,11 +26,17 @@ class Detector(object):
         kernel_dilation = np.ones((self.kernel_dilation_size, self.kernel_dilation_size), np.uint8)
         eroded, dilated = self.morph(fg_mask, kernel_erosion, kernel_dilation)
 
+        contour_tracing_frame = copy.copy(cv2.cvtColor(dilated, cv2.COLOR_GRAY2RGB))
+
         # Downsample
         downsampled_image = self.downsample(dilated, self.scale, self.downsampling_mode)
-        
+
+        start_time = time.time()
         # Find contours
         contours = self.contour_tracing.findCountourCustom(downsampled_image)
+        end_time = time.time()
+        ct_elapse_time = end_time - start_time
+
 
         # Find centers, width, and height for each contour / object
         # Rescale to original size
@@ -48,7 +56,19 @@ class Detector(object):
             cv2.rectangle(frame, (x, y), (x + w, y + h), (0, 255, 255), 2)
             cv2.circle(frame, (cX, cY), 3, (255, 0, 0), -1)
 
-        return detections, contours, fg_mask, eroded, dilated
+            cv2.rectangle(contour_tracing_frame, (x, y), (x + w, y + h), (0, 255, 255), 2)
+            cv2.circle(contour_tracing_frame, (cX, cY), 3, (255, 0, 0), -1)
+
+        return (
+            detections,
+            contours,
+            fg_mask,
+            contour_tracing_frame,
+            eroded,
+            dilated,
+            downsampled_image,
+            ct_elapse_time,
+        )
 
     def morph(self, fg_mask, kernel_erosion, kernel_dilation):
         erosion = cv2.erode(fg_mask, kernel_erosion, iterations=1)
@@ -57,15 +77,14 @@ class Detector(object):
         return erosion, dilation
 
     def downsample(self, frame, scale, mode="resize"):
-        
+
         times = np.sqrt(scale)
 
         for i in range(int(np.round(times))):
             rows, cols = frame.shape
             if mode == "pyr":
-                frame = cv2.pyrDown(frame, dstsize=(cols // 2, rows // 2 ))
+                frame = cv2.pyrDown(frame, dstsize=(cols // 2, rows // 2))
             elif mode == "resize":
-                frame = cv2.resize(frame, dsize=(cols // 2, rows // 2 ))
-        
-        return frame
+                frame = cv2.resize(frame, dsize=(cols // 2, rows // 2))
 
+        return frame

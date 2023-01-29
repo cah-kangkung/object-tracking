@@ -4,35 +4,39 @@ from detector import Detector
 from tracker import Tracker
 from contour_tracing import ContourTracing
 import numpy as np
-import time 
+import time
 import os
 import argparse
 
+
 def main():
     parser = argparse.ArgumentParser()
-    parser.add_argument("-p", "--Path", help = "Video path")
-    parser.add_argument("-n", "--Name", help = "Video name")
-    parser.add_argument("-kes", "--KES", help = "Kernel Erosion Size")
-    parser.add_argument("-kds", "--KDS", help = "Kernel Dilation Size")
-    parser.add_argument("-ss", "--ScreenShots", help = "Frame to be saved")
+    parser.add_argument("-m", "--Mode", default=10, help="Wait key mode")
+    parser.add_argument("-p", "--Path", help="Video path")
+    parser.add_argument("-n", "--Name", help="Video name")
+    parser.add_argument("-kes", "--KES", help="Kernel Erosion Size")
+    parser.add_argument("-kds", "--KDS", help="Kernel Dilation Size")
+    parser.add_argument("-s", "--Scale", help="Downsampling Scale")
+    parser.add_argument("-ss", "--ScreenShots", help="Frame to be saved")
     args = parser.parse_args()
 
     # Input
+    mode = int(args.Mode)
     name = args.Name
     video_path = args.Path
     kernel_erosion_size = int(args.KES)
     kernel_dilation_size = int(args.KDS)
     screenshots = []
-    if args.ScreenShots :
-        screenshots = args.ScreenShots.split(',')
-    scale = 8
+    if args.ScreenShots:
+        screenshots = args.ScreenShots.split(",")
+    scale = int(args.Scale)
     downsampling_mode = "resize"
     max_frame_to_skip = 10
 
     capture = cv2.VideoCapture(video_path)
     detector = Detector(kernel_erosion_size, kernel_dilation_size, scale, downsampling_mode)
     tracker = Tracker(max_frame_to_skip)
-    
+
     skiped_frame = 50
     frame_count = 0
     while True:
@@ -42,8 +46,17 @@ def main():
             break
         frame_count += 1
 
-        detections, contours, fg_mask, eroded, dilated = detector.detect(frame)
-        
+        (
+            detections,
+            contours,
+            fg_mask,
+            contour_tracing_frame,
+            eroded,
+            dilated,
+            downsampled_image,
+            ct_elapse_time,
+        ) = detector.detect(frame)
+
         if frame_count > skiped_frame:
             tracker.update_tracks(detections, frame)
 
@@ -51,114 +64,90 @@ def main():
 
         # Frame
         cv2.rectangle(frame, (10, 2), (80, 20), (255, 255, 255), -1)
-        cv2.putText(
-            frame, current_frame, (13, 15), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 0, 0)
-        )
+        cv2.putText(frame, current_frame, (13, 15), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 0, 0))
 
         # Count
         cv2.rectangle(frame, (100, 2), (130, 20), (255, 255, 255), -1)
         cv2.putText(
-            frame, str(len(tracker.tracks)), (105, 15), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 0, 0)
+            frame,
+            str(len(tracker.tracks)),
+            (105, 15),
+            cv2.FONT_HERSHEY_SIMPLEX,
+            0.5,
+            (0, 0, 0),
         )
 
-        # Count
-        cv2.rectangle(frame, (150, 2), (400, 20), (255, 255, 255), -1)
+        # Legend
+        cv2.rectangle(frame, (150, 2), (440, 20), (255, 255, 255), -1)
         cv2.rectangle(frame, (155, 6), (175, 16), (255, 0, 0), -1)
-        cv2.putText(
-            frame, '=current', (180, 15), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 0, 0)
-        )
+        cv2.putText(frame, "=predicted", (180, 15), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 0, 0))
         cv2.rectangle(frame, (270, 6), (290, 16), (0, 0, 255), -1)
-        cv2.putText(
-            frame, '=KF', (295, 15), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 0, 0)
-        )
+        cv2.putText(frame, "=KF", (295, 15), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 0, 0))
+        cv2.rectangle(frame, (335, 6), (355, 16), (0, 255, 255), -1)
+        cv2.putText(frame, "=detected", (355, 15), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 0, 0))
+
+        # Scale
+        cv2.rectangle(frame, (450, 2), (480, 20), (255, 255, 255), -1)
+        cv2.putText(frame, f"x{str(scale)}", (455, 15), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 0, 0))
 
         cv2.imshow("Frame", frame)
         cv2.imshow("GMM", fg_mask)
         cv2.imshow("Eroded", eroded)
         cv2.imshow("Dilated", dilated)
-        
-        keyboard = cv2.waitKey(10)
-        if keyboard == 27:
+
+        keyboard = cv2.waitKey(mode)
+        if keyboard == 27 or (int(current_frame) > int(screenshots[-1])):
             break
         elif keyboard == ord("s") or current_frame in screenshots:
             print("FRAME SS", current_frame)
-            path_gmm_morph = f'screenshots/{name}/gmm_morph/f{current_frame}/{kernel_erosion_size}x{kernel_dilation_size}'
-            os.makedirs(path_gmm_morph, exist_ok=True)
-            cv2.imwrite(f'{path_gmm_morph}/{name}_original_frame{current_frame}.jpg', original_frame)
-            cv2.imwrite(f'{path_gmm_morph}/{name}_gmm_frame{current_frame}.jpg', fg_mask)
-            cv2.imwrite(f'{path_gmm_morph}/{name}_eroded_frame{current_frame}_{kernel_erosion_size}x{kernel_dilation_size}.jpg', eroded)
-            cv2.imwrite(f'{path_gmm_morph}/{name}_dilated_frame{current_frame}_{kernel_erosion_size}x{kernel_dilation_size}.jpg', dilated)
-            cv2.imwrite(f'{path_gmm_morph}/{name}_result_frame{current_frame}.jpg', frame)
-            
+
+            path_orig_gmm = f"screenshots/{name}/f{current_frame}"
+            os.makedirs(path_orig_gmm, exist_ok=True)
+            cv2.imwrite(
+                f"{path_orig_gmm}/{name}_original_frame{current_frame}.jpg",
+                original_frame,
+            )
+            cv2.imwrite(f"{path_orig_gmm}/{name}_gmm_frame{current_frame}.jpg", fg_mask)
+
+            path_morph = f"screenshots/{name}/f{current_frame}/gmm_morph"
+            os.makedirs(path_morph, exist_ok=True)
+            cv2.imwrite(
+                f"{path_morph}/{name}_eroded_{kernel_erosion_size}x{kernel_dilation_size}_frame{current_frame}.jpg",
+                eroded,
+            )
+            cv2.imwrite(
+                f"{path_morph}/{name}_dilated_{kernel_erosion_size}x{kernel_dilation_size}_frame{current_frame}.jpg",
+                dilated,
+            )
+
+            path_downsample = f"screenshots/{name}/f{current_frame}/downsample"
+            os.makedirs(path_downsample, exist_ok=True)
+            cv2.imwrite(
+                f"{path_downsample}/{name}_downsample_x{scale}_m{kernel_erosion_size}x{kernel_dilation_size}_frame{current_frame}.jpg",
+                downsampled_image,
+            )
+
+            path_contour_tracing = f"screenshots/{name}/f{current_frame}/contour_tracing"
+            os.makedirs(path_contour_tracing, exist_ok=True)
+            with open(f"{path_contour_tracing}/performance.txt", "a") as f:
+                f.write(
+                    f"{name}_downsample_x{scale}_m{kernel_erosion_size}x{kernel_dilation_size}_frame{current_frame} = {ct_elapse_time} seconds & ({len(contours)}) contours \n"
+                )
+            cv2.imwrite(
+                f"{path_contour_tracing}/{name}_contour_downsample_x{scale}_m{kernel_erosion_size}x{kernel_dilation_size}_frame{current_frame}.jpg",
+                contour_tracing_frame,
+            )
+
+            path_result = f"screenshots/{name}/f{current_frame}/result_kf"
+            os.makedirs(path_result, exist_ok=True)
+            cv2.imwrite(
+                f"{path_result}/{name}_result_kf_x{scale}_m{kernel_erosion_size}x{kernel_dilation_size}_frame{current_frame}.jpg",
+                frame,
+            )
+
     capture.release()
     cv2.destroyAllWindows()
 
-def downsampling():
-    file_name = "morphed_frame_30.0"
-    image = cv2.imread("screenshots/" + file_name + ".jpg")
-    cv2.imshow("Original Image", image)
-
-    scale = 8
-    method = "resize"
-    detector = Detector(1, 1, scale, method)
-    contour_tracing = ContourTracing()
-    gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
-
-    downsampled_image = detector.downsample(gray, scale, method)
-
-    start_time_first = time.time()
-    # contours_first, _ = cv2.findContours(gray, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_NONE) 
-    contours_first = contour_tracing.findCountourCustom(gray) 
-    end_time_first = time.time()
-
-    start_time_second = time.time()
-    # contours_second, _ = cv2.findContours(downsampled_image, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_NONE)
-    contours_second = contour_tracing.findCountourCustom(downsampled_image)
-    end_time_second = time.time()
-
-
-    print("Original Image", end_time_first - start_time_first)
-    print("Downsampled Image", end_time_second - start_time_second)
-    print("Jumlah", len(contours_second))
-    # Find centers, width, and height for each contour / object
-    detections = []
-    for contour in contours_second:
-        x, y, w, h = cv2.boundingRect(contour)
-        upscale_x = x * scale
-        upscale_y = y * scale
-        upscale_w = w * scale
-        upscale_h = h * scale
-        cX = x + w // 2
-        cY = y + h // 2
-        upscale_cX = upscale_x + upscale_w // 2
-        upscale_cY = upscale_y + upscale_h // 2
-
-        detection = np.array([[cX], [cY], [w], [h]])
-        detections.append(np.round(detection))
-
-        cv2.rectangle(image, (upscale_x, upscale_y), (upscale_x + upscale_w, upscale_y + upscale_h), (0, 255, 255), 2)
-        cv2.circle(downsampled_image, (cX, cY), 1 // scale, (0, 0, 255), -1)
-        cv2.circle(image, (upscale_cX, upscale_cY), 3, (255, 0, 0), -1)
-
-
-    string =  "scale: x" + str(scale) + ", count: " + str(len(contours_second)) + ", time: " + str(end_time_second - start_time_second)
-    cv2.putText(
-        image, string, (15, 15), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (255, 255, 255)
-    )
-
-    cv2.imshow("Downsampled Image", downsampled_image)
-    cv2.imshow("Traced Image", image)
-
-    if method == "pyr":
-        cv2.imwrite("screenshots/" + file_name + "_x" + str(scale) + "_downsampled_at.jpg", downsampled_image)
-        cv2.imwrite("screenshots/" + file_name + "_x" + str(scale) + "_original_at.jpg", image)
-    else:    
-        cv2.imwrite("screenshots/" + file_name + "_x" + str(scale) + "_resize_downsampled_at.jpg", downsampled_image)
-        cv2.imwrite("screenshots/" + file_name + "_x" + str(scale) + "_resize_original_at.jpg", image)
-
-
-    cv2.waitKey(0)    
-    cv2.destroyAllWindows()
 
 if __name__ == "__main__":
     main()

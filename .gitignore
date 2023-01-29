@@ -160,6 +160,8 @@ cython_debug/
 # Cython debug symbols
 datasets/
 screenshots/
+groundtruth/
+generate_result.sh
 
 # PyCharm
 #  JetBrains specific template is maintained in a separate JetBrains.gitignore that can
