@@ -16,8 +16,13 @@ class Tracker(object):
         self.tracks = []
         self.max_frames_to_skip = max_frames_to_skip
         self.track_id = 0
+        self.x_predicted = []
+        self.x_detected = []
+        self.y_predicted = []
+        self.y_detected = []
+        self.number_of_objects = []
 
-    def update_tracks(self, detections, frame):
+    def update_tracks(self, detections, frame, frame_number):
         # If there are no tracks, check for detection and create track object
         if len(self.tracks) == 0:
             for i in range(len(detections)):
@@ -76,9 +81,14 @@ class Tracker(object):
             if assignment[i] != -1:
                 # if a prediction assigned to a detection, update prediction with that detection
                 self.tracks[i].prediction = self.tracks[i].KF.update(detections[assignment[i]])
+                if (frame_number % 10 == 0):
+                    self.generate_rmse_array(self.tracks[i].prediction, detections[assignment[i]])
             else:
                 # else just update with no detection
                 self.tracks[i].prediction = self.tracks[i].KF.x
+                
+        if (frame_number % 10 == 0):
+            self.generate_number_objects_array(len(self.tracks))
 
         self.show_boundingbox(frame, self.tracks, (0, 0, 255))
 
@@ -105,3 +115,12 @@ class Tracker(object):
                 color,
                 2,
             )
+    
+    def generate_rmse_array(self, predicted, detected):
+        self.x_predicted.append(predicted.flat[0])
+        self.x_detected.append(detected[0][0])
+        self.y_predicted.append(predicted.flat[1])
+        self.y_detected.append(detected[1][0])
+
+    def generate_number_objects_array(self, number):
+        self.number_of_objects.append(number)

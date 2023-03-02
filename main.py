@@ -7,6 +7,7 @@ import numpy as np
 import time
 import os
 import argparse
+from sklearn.metrics import mean_squared_error
 
 
 def main():
@@ -58,7 +59,7 @@ def main():
         ) = detector.detect(frame)
 
         if frame_count > skiped_frame:
-            tracker.update_tracks(detections, frame)
+            tracker.update_tracks(detections, frame, int(capture.get(cv2.CAP_PROP_POS_FRAMES)))
 
         current_frame = str(int(capture.get(cv2.CAP_PROP_POS_FRAMES)))
 
@@ -144,6 +145,19 @@ def main():
                 f"{path_result}/{name}_result_kf_x{scale}_m{kernel_erosion_size}x{kernel_dilation_size}_frame{current_frame}.jpg",
                 frame,
             )
+
+    x_rmse = mean_squared_error(tracker.x_detected, tracker.x_predicted, squared=False)
+    y_rmse = mean_squared_error(tracker.y_detected, tracker.y_predicted, squared=False)
+    print(x_rmse, y_rmse)
+    total_rmse = np.sqrt(x_rmse**2 + y_rmse**2)
+
+    average_total_objects = np.sum(tracker.number_of_objects) / len(tracker.number_of_objects)
+
+    os.makedirs(f'screenshots/{name}', exist_ok=True)
+    with open(f'screenshots/{name}/kf_rmse.txt', "a") as f:
+        f.write(
+            f"{name}_downsample_x{scale}_m{kernel_erosion_size}x{kernel_dilation_size}_frame{current_frame} = total {x_rmse} + {y_rmse} > {total_rmse} | average {average_total_objects} \n"
+        )
 
     capture.release()
     cv2.destroyAllWindows()
