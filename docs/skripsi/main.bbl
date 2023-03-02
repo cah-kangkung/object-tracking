@@ -1,0 +1,191 @@
+\begin{thebibliography}{}
+
+\bibitem[\protect\astroncite{Affandy}{2016}]{Affandy2016}
+Affandy, A.~P. 2016.
+\newblock {\em Model Alat Penghitung Benih Ikan Air Tawar Ikan Mas (Fish
+  Counter)}.
+\newblock Skripsi.
+\newblock Universitas Padjadjaran, Jatinagor.
+
+\bibitem[\protect\astroncite{Al-Amri}{2020}]{AlAmri2020}
+Al-Amri, C.~F. 2020.
+\newblock {\em Rancang Bangun Fish Counter untuk Menghitung Bibit Ikan Lele}.
+\newblock Skripsi.
+\newblock Universitas Islam Indonesia, Yogyakarta.
+
+\bibitem[\protect\astroncite{Benezeth et~al.}{2010}]{Benezeth2010}
+Benezeth, Y., Jodoin, P.-M., Emile, B., Laurent, H., dan Rosenberger, C. 2010.
+\newblock Comparative study of background subtraction algorithms.
+\newblock {\em Journal of Electronic Imaging}.
+
+\bibitem[\protect\astroncite{Challa et~al.}{2011}]{Challa2011}
+Challa, S., Morelande, M.~R., Musicki, D., dan Evans, R.~J. 2011.
+\newblock {\em Fundamentals of Object Tracking}.
+\newblock Cambridge University Press, New York.
+
+\bibitem[\protect\astroncite{Chavan dan Gengaje}{2017}]{Chavan2017}
+Chavan, R. dan Gengaje, S.~R. 2017.
+\newblock Multiple object detection using gmm technique and tracking using
+  kalman filter.
+\newblock {\em International Journal of Computer Applications (0975 – 8887)}.
+
+\bibitem[\protect\astroncite{Desai dan Gandhi}{2016}]{Desai2014}
+Desai, M. H.~M. dan Gandhi, V. 2016.
+\newblock A survey: Background subtraction techniques.
+\newblock {\em International Journal of Scientific and Engineering Research},
+  5.
+
+\bibitem[\protect\astroncite{Devi dan Singh}{2016}]{Devi2016}
+Devi, R.~B. dan Singh, K.~M. 2016.
+\newblock A survey on different background subtraction method for moving object
+  detection.
+\newblock {\em International Journal for Research in Emerging Science and
+  Technology}, 3:7--13.
+
+\bibitem[\protect\astroncite{Friedman dan Russell}{1997}]{Friedman1997}
+Friedman, N. dan Russell, S. 1997.
+\newblock Image segmentation in video sequences: A probabilistic approach.
+\newblock {\em Thirteenth Conference on Uncertainty in Artificial
+  Intelligence}.
+
+\bibitem[\protect\astroncite{Gonzalez dan Woods}{2018}]{Gonzalez2018}
+Gonzalez, R.~C. dan Woods, R.~E. 2018.
+\newblock {\em Digital Image Processing}.
+\newblock Pearson Education, New York, 330 Hudson Street, fourth edition.
+
+\bibitem[\protect\astroncite{Goodfellow et~al.}{2016}]{Goodfellow-et-al-2016}
+Goodfellow, I., Bengio, Y., dan Courville, A. 2016.
+\newblock {\em Deep Learning}.
+\newblock MIT Press.
+
+\bibitem[\protect\astroncite{Jeong et~al.}{2014}]{Jeong2014}
+Jeong, J.-M., Yoon, T.-S., dan Park, J.-B. 2014.
+\newblock Kalman filter based multiple objects detection-tracking algorithm
+  robust to occlusion.
+\newblock {\em SICE Annual Conference}.
+
+\bibitem[\protect\astroncite{Kalman}{1960}]{Kalman1960}
+Kalman, R.~E. 1960.
+\newblock A new approach to linear filtering and prediction problems.
+\newblock {\em Journal of Basic Engineering}.
+
+\bibitem[\protect\astroncite{Kavasidis et~al.}{2012}]{Kavasidis2012}
+Kavasidis, I., Palazzo, S., Salvo, R.~D., Giordano, D., dan Spampinato, C.
+  2012.
+\newblock A semi-automatic tool for detection and tracking ground truth
+  generation in videos.
+\newblock {\em Proceedings of the 1st International Workshop on Visual
+  Interfaces for Ground Truth Collection in Computer Vision Applications, pp.
+  6:1-6:5}.
+
+\bibitem[\protect\astroncite{Kavasidis et~al.}{2013}]{Kavasidis2013}
+Kavasidis, I., Palazzo, S., Salvo, R.~D., Giordano, D., dan Spampinato, C.
+  2013.
+\newblock An innovative web-based collaborative platform for video annotation.
+\newblock {\em Multimedia Tools and Applications, vol. 70, pp. 413-432}.
+
+\bibitem[\protect\astroncite{Kim dan Bang}{2018}]{Kim2018}
+Kim, Y. dan Bang, H. 2018.
+\newblock {\em Introduction and Implementations of the Kalman Filter}.
+\newblock IntechOpen, Daejeon, Korea Advanced Institute of Science and
+  Technology, Daejeon, South Korea.
+
+\bibitem[\protect\astroncite{Kulchandani dan
+  Dangarwala}{2015}]{Kulchandani2015}
+Kulchandani, J.~S. dan Dangarwala, K.~J. 2015.
+\newblock Moving object detection: Review of recent research trends.
+\newblock {\em International Conference on Pervasive Computing}.
+
+\bibitem[\protect\astroncite{Li et~al.}{2010}]{Li2010}
+Li, X., Wang, K., Wang, W., dan Li, Y. 2010.
+\newblock A multiple object tracking method using kalman filter.
+\newblock {\em Proceedings of the 2010 IEEE International Conference on
+  Information and Automation June 20 - 23, Harbin, China}.
+
+\bibitem[\protect\astroncite{Manjula dan Lakshmi}{2016}]{Manjula2016}
+Manjula, S. dan Lakshmi, K. 2016.
+\newblock A study on object detection.
+\newblock {\em International Journal of Pharmacy and Technology}.
+
+\bibitem[\protect\astroncite{Munir}{2004}]{Munir2004}
+Munir, R. 2004.
+\newblock {\em Pengolahan Citra Digital dengan Pendekatan Algoritmik}.
+\newblock Informatika, Bandung.
+
+\bibitem[\protect\astroncite{Paul dan Godambe}{2021}]{Paul2021}
+Paul, C. dan Godambe, M. 2021.
+\newblock Image downsampling and upsampling.
+\newblock {\em Department of Electronics and Telecommunication}.
+
+\bibitem[\protect\astroncite{Saleh et~al.}{2020}]{Saleh2020}
+Saleh, A., Laradji, I.~H., Konovalov, D.~A., Bradley, M., Vazquez, D., dan
+  Sheaves, M. 2020.
+\newblock A realistic fish-habitat dataset to evaluate algorithms for
+  underwater visual analysis.
+\newblock {\em Nature's Scientific Reports}.
+
+\bibitem[\protect\astroncite{Saravanakumar et~al.}{2010}]{Saravanakumar2010}
+Saravanakumar, S., Vadivel, A., dan Ahmed, C. G.~S. 2010.
+\newblock Multiple human object tracking using background subtraction and
+  shadow removal techniques.
+\newblock {\em International Conference on Signal and Image Processing}.
+
+\bibitem[\protect\astroncite{Smith}{2017}]{Leslie2017}
+Smith, L.~N. 2017.
+\newblock Cyclical learning rates for training neural networks.
+\newblock {\em IEEE Winter Conference on Applications of Computer Vision
+  (WACV)}.
+
+\bibitem[\protect\astroncite{Srisha dan Khan}{2013}]{Srisha2013}
+Srisha, R. dan Khan, A. 2013.
+\newblock Morphological operations for image processing : Understanding and it
+  applications.
+\newblock {\em National Conference on VLSI, Signal processing and
+  Communications}.
+
+\bibitem[\protect\astroncite{Statistik}{2016a}]{bps022016}
+Statistik, B.~P. 2016a.
+\newblock Jumlah rumah tangga perikanan budidaya menurut provinsi dan jenis
+  budidaya.
+\newblock
+  https://www.bps.go.id/statictable/2013/12/31/1707/jumlah-rumah-tangga-perikanan-budidaya-menurut-provinsi-dan-jenis-budidaya-2000-2016.html.
+\newblock Di akses pada, 21 September 2021.
+
+\bibitem[\protect\astroncite{Statistik}{2016b}]{bps032016}
+Statistik, B.~P. 2016b.
+\newblock Konsumsi kalori dan protein penduduk indonesia dan provinsi.
+\newblock
+  https://www.bps.go.id/publication/2020/06/29/78ae644b0d37f4e1329d522f/konsumsi-kalori-dan-protein-penduduk-indonesia-dan-provinsi-september-2019.html.
+\newblock Di akses pada, 21 September 2021.
+
+\bibitem[\protect\astroncite{Statistik}{2016c}]{bps012016}
+Statistik, B.~P. 2016c.
+\newblock Produksi perikanan budidaya menurut provinsi dan jenis budidaya.
+\newblock
+  https://www.bps.go.id/statictable/2009/10/05/1706/produksi-perikanan-budidaya-menurut-provinsi-dan-jenis-budidaya-2000-2018.html.
+\newblock Di akses pada, 21 September 2021.
+
+\bibitem[\protect\astroncite{Stauffer dan Grimson}{1999}]{Stauffer1999}
+Stauffer, C. dan Grimson, W. E.~L. 1999.
+\newblock Adaptive background mixture models for real-time tracking.
+\newblock {\em IEEE Computer Society Conference on Computer Vision and Pattern
+  Recognition}.
+
+\bibitem[\protect\astroncite{Suzuki}{1985}]{Suzuki1985}
+Suzuki, S. 1985.
+\newblock Topological structural analysis of digitized binary images by border
+  following.
+\newblock {\em Computer Vision, Graphics, and Image Processing}, 30:32--46.
+
+\bibitem[\protect\astroncite{Wantimpres}{2017}]{wantimpres2017}
+Wantimpres 2017.
+\newblock Potensi perikanan indonesia.
+\newblock https://wantimpres.go.id/id/potensi-perikanan-indonesia/.
+\newblock Di akses pada, 21 September 2021.
+
+\bibitem[\protect\astroncite{Yilmaz et~al.}{2006}]{Yilmaz2006}
+Yilmaz, A., Javed, O., dan Shah, M. 2006.
+\newblock Object tracking: A survey.
+\newblock {\em ACM Computing Surveys}, 38.
+
+\end{thebibliography}

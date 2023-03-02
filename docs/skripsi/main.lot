@@ -1,0 +1,24 @@
+\babel@toc {bahasa}{}\relax 
+\babel@toc {bahasa}{}\relax 
+\babel@toc {bahasa}{}\relax 
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\contentsline {table}{\numberline {2.1}{Aturan penetapan \textit {parent border}}}{25}{table.2.1}%
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\contentsline {table}{\numberline {4.1}{Hasil ujicoba proses \textit {background subtraction} menggunakan GMM terhadap video indeks 9908}}{55}{table.4.1}%
+\contentsline {table}{\numberline {4.2}{Hasil ujicoba proses \textit {background subtraction} menggunakan GMM terhadap video indeks 9986}}{56}{table.4.2}%
+\contentsline {table}{\numberline {4.3}{Hasil uji coba proses \textit {background subtraction} menggunakan GMM terhadap video indeks gt\textunderscore 124}}{57}{table.4.3}%
+\contentsline {table}{\numberline {4.4}{Hasil uji coba proses \textit {background subtraction} menggunakan GMM terhadap video indeks gt\textunderscore 116}}{58}{table.4.4}%
+\contentsline {table}{\numberline {4.5}{Skor \textit {Accuracy}, \textit {Recall}, \textit {Precision}, dan \textit {F1} pada metode \textit {Background Subtraction} menggunakan GMM}}{59}{table.4.5}%
+\contentsline {table}{\numberline {4.6}{Hasil uji coba proses \textit {background subtraction} menggunakan GMM yang disempurnakan oleh Operasi Morfologi}}{61}{table.4.6}%
+\contentsline {table}{\numberline {4.7}{Skor \textit {Accuracy, Recall, Precision, dan F1} Operasi Morfologi}}{63}{table.4.7}%
+\contentsline {table}{\numberline {4.8}{Hasil uji coba metode CT yang ditingkatkan oleh \textit {Downsampling} pada video indeks 9908 dengan ukuran \textit {kernel} Operasi Morfologi 7x13}}{66}{table.4.8}%
+\contentsline {table}{\numberline {4.9}{Hasil uji coba metode CT yang ditingkatkan oleh \textit {Downsampling} pada video indeks 9866 dengan ukuran \textit {Kernel} Operasi Morfologi 7x13}}{68}{table.4.9}%
+\contentsline {table}{\numberline {4.10}{Hasil uji coba metode CT yang ditingkatkan oleh \textit {Downsampling} pada video indeks gt\textunderscore 124 dengan ukuran \textit {kernel} Operasi Morfologi 7x13}}{70}{table.4.10}%
+\contentsline {table}{\numberline {4.11}{Hasil uji coba performa metode CT yang ditingkatkan oleh \textit {Downsampling} pada video indeks gt\textunderscore 116 dengan ukuran \textit {kernel} Operasi Morfologi 7x13}}{72}{table.4.11}%
+\contentsline {table}{\numberline {4.12}{Evaluasi hasil dan performa metode CT video kategori objek tunggal terhadap ukuran \textit {kernel} Operasi Morofologi serta skala \textit {Downsampling} yang berbeda-beda}}{74}{table.4.12}%
+\contentsline {table}{\numberline {4.13}{Evaluasi hasil dan performa metode CT video kategori objek lebih dari satu terhadap ukuran \textit {kernel} Operasi Morofologi serta skala \textit {Downsampling} yang berbeda-beda}}{77}{table.4.13}%
+\contentsline {table}{\numberline {4.14}{Evaluasi hasil dan performa \textit {counting} metode KF terhadap ukuran \textit {kernel} Operasi Morofologi serta skala \textit {Downsampling} yang berbeda-beda}}{85}{table.4.14}%
+\contentsline {table}{\numberline {4.15}{Evaluasi hasil dan performa \textit {tracking} metode KF terhadap ukuran \textit {kernel} Operasi Morofologi serta skala \textit {Downsampling} yang berbeda-beda}}{88}{table.4.15}%
+\addvspace {10\p@ }

@@ -1,0 +1,67 @@
+\babel@toc {bahasa}{}\relax 
+\babel@toc {bahasa}{}\relax 
+\contentsline {chapter}{LEMBAR PERSETUJUAN HASIL SIDANG SKRIPSI}{ii}{chapter*.1}%
+\contentsline {chapter}{LEMBAR PERNYATAAN}{iii}{chapter*.2}%
+\contentsline {chapter}{HALAMAN PERSEMBAHAN}{iv}{chapter*.3}%
+\contentsline {chapter}{KATA PENGANTAR}{v}{chapter*.4}%
+\contentsline {chapter}{ABSTRAK}{vii}{chapter*.5}%
+\contentsline {chapter}{ABSTRAK}{viii}{chapter*.6}%
+\contentsline {chapter}{DAFTAR ISI}{xi}{chapter*.7}%
+\contentsline {chapter}{DAFTAR TABEL}{xiii}{chapter*.8}%
+\contentsline {chapter}{DAFTAR GAMBAR}{xv}{chapter*.9}%
+\contentsline {chapter}{DAFTAR LAMPIRAN}{xv}{chapter*.9}%
+\babel@toc {bahasa}{}\relax 
+\contentsline {chapter}{\numberline {I}PENDAHULUAN}{1}{chapter.1}%
+\contentsline {section}{\numberline {1.1}Latar Belakang Masalah}{1}{section.1.1}%
+\contentsline {section}{\numberline {1.2}Rumusan Masalah}{5}{section.1.2}%
+\contentsline {section}{\numberline {1.3}Batasan Masalah}{5}{section.1.3}%
+\contentsline {section}{\numberline {1.4}Tujuan Penelitian}{6}{section.1.4}%
+\contentsline {section}{\numberline {1.5}Manfaat Penelitian}{6}{section.1.5}%
+\contentsline {chapter}{\numberline {II}KAJIAN PUSTAKA}{7}{chapter.2}%
+\contentsline {section}{\numberline {2.1}Pengertian Citra Digital}{7}{section.2.1}%
+\contentsline {section}{\numberline {2.2}Pengolahan Citra Digital}{8}{section.2.2}%
+\contentsline {section}{\numberline {2.3}Pengertian Citra Bergerak (Video)}{9}{section.2.3}%
+\contentsline {section}{\numberline {2.4}Deteksi Objek Bergerak}{10}{section.2.4}%
+\contentsline {section}{\numberline {2.5}\textit {Background Subtraction}}{11}{section.2.5}%
+\contentsline {section}{\numberline {2.6}\textit {Background Subtraction} Menggunakan \textit {Gaussian Mixture Models}}{12}{section.2.6}%
+\contentsline {subsection}{\numberline {2.6.1}\textit {Gaussian Mixture Models}}{13}{subsection.2.6.1}%
+\contentsline {subsection}{\numberline {2.6.2}\textit {Modeling Process}}{14}{subsection.2.6.2}%
+\contentsline {subsection}{\numberline {2.6.3}\textit {Background Model Estimation}}{15}{subsection.2.6.3}%
+\contentsline {section}{\numberline {2.7}Operasi Morfologi}{16}{section.2.7}%
+\contentsline {section}{\numberline {2.8}Jenis - Jenis Operasi Morfologi}{17}{section.2.8}%
+\contentsline {subsection}{\numberline {2.8.1}Erosi}{18}{subsection.2.8.1}%
+\contentsline {subsection}{\numberline {2.8.2}Dilasi}{18}{subsection.2.8.2}%
+\contentsline {subsection}{\numberline {2.8.3}\textit {Opening}}{19}{subsection.2.8.3}%
+\contentsline {subsection}{\numberline {2.8.4}\textit {Closing}}{20}{subsection.2.8.4}%
+\contentsline {section}{\numberline {2.9}\textit {Downsampling}}{21}{section.2.9}%
+\contentsline {section}{\numberline {2.10}Contour Tracing}{22}{section.2.10}%
+\contentsline {section}{\numberline {2.11}Pelacakan Objek}{29}{section.2.11}%
+\contentsline {section}{\numberline {2.12}Kalman Filter}{29}{section.2.12}%
+\contentsline {subsection}{\numberline {2.12.1}Definisi}{29}{subsection.2.12.1}%
+\contentsline {subsection}{\numberline {2.12.2}Algoritme Kalman Filter}{31}{subsection.2.12.2}%
+\contentsline {section}{\numberline {2.13}\textit {Decision of Occlusion}}{33}{section.2.13}%
+\contentsline {section}{\numberline {2.14}Asosiasi Data}{34}{section.2.14}%
+\contentsline {chapter}{\numberline {III}METODE PENELITIAN}{36}{chapter.3}%
+\contentsline {section}{\numberline {3.1}Deskripsi Sistem}{36}{section.3.1}%
+\contentsline {section}{\numberline {3.2}Perancangan Sistem}{36}{section.3.2}%
+\contentsline {subsection}{\numberline {3.2.1}Proses Input Video}{38}{subsection.3.2.1}%
+\contentsline {subsection}{\numberline {3.2.2}Keluaran}{38}{subsection.3.2.2}%
+\contentsline {subsection}{\numberline {3.2.3}Deteksi Objek dengan GMM}{38}{subsection.3.2.3}%
+\contentsline {subsection}{\numberline {3.2.4}Proses Menghilangkan Noise Melalui Operasi Morfologi}{40}{subsection.3.2.4}%
+\contentsline {subsection}{\numberline {3.2.5}\textit {Downsampling} dan \textit {Contour Tracing}}{41}{subsection.3.2.5}%
+\contentsline {subsection}{\numberline {3.2.6}\textit {Decision of Occlusion}, Asosiasi Data, dan Kalman Filter }{43}{subsection.3.2.6}%
+\contentsline {section}{\numberline {3.3}Perancangan Eksperimen}{46}{section.3.3}%
+\contentsline {subsection}{\numberline {3.3.1}Sumber Data}{46}{subsection.3.3.1}%
+\contentsline {subsection}{\numberline {3.3.2}Evaluasi Hasil}{49}{subsection.3.3.2}%
+\contentsline {subsection}{\numberline {3.3.3}Parameter Sistem}{53}{subsection.3.3.3}%
+\contentsline {chapter}{\numberline {IV}HASIL DAN PEMBAHASAN}{54}{chapter.4}%
+\contentsline {section}{\numberline {4.1}Input Video}{54}{section.4.1}%
+\contentsline {section}{\numberline {4.2}GMM}{54}{section.4.2}%
+\contentsline {section}{\numberline {4.3}Operasi Morfologi}{61}{section.4.3}%
+\contentsline {section}{\numberline {4.4}\textit {Contour Tracing} dan \textit {Downsampling}}{66}{section.4.4}%
+\contentsline {section}{\numberline {4.5}Kalman Filter}{81}{section.4.5}%
+\contentsline {chapter}{\numberline {V}PENUTUP}{93}{chapter.5}%
+\contentsline {section}{\numberline {5.1}Kesimpulan}{93}{section.5.1}%
+\contentsline {section}{\numberline {5.2}Saran}{94}{section.5.2}%
+\contentsline {chapter}{DAFTAR PUSTAKA}{97}{chapter*.48}%
+\contentsline {chapter}{LAMPIRAN}{98}{chapter*.48}%

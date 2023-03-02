@@ -1,5 +1,7 @@
 # Fish Movement Tracking with GMM and Kalman Filter
 
+The fish movement tracking system is a command-line based system that is created with the python programming language. This system aims to track fish and calculate the average number of fish in a video. To run the system, users need to install python version 3 (three) first, as well as prepare a dataset in the form of a video that you want to track the objects inside.
+
 ## Command args
  * `-p` = Video path
  * `-n` = Video name

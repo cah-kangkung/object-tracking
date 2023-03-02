@@ -1,0 +1,45 @@
+\babel@toc {bahasa}{}\relax 
+\babel@toc {bahasa}{}\relax 
+\babel@toc {bahasa}{}\relax 
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {2.1}{\ignorespaces Pendekatan Tradisional Deteksi Objek Bergerak\relax }}{10}{figure.caption.11}%
+\contentsline {figure}{\numberline {2.2}{\ignorespaces Skema sederhana metode \textit {Background Subtraction}\relax }}{12}{figure.caption.12}%
+\contentsline {figure}{\numberline {2.3}{\ignorespaces Representasi \textit {Structuring Element}\relax }}{17}{figure.caption.13}%
+\contentsline {figure}{\numberline {2.4}{\ignorespaces Operasi Erosi\relax }}{18}{figure.caption.14}%
+\contentsline {figure}{\numberline {2.5}{\ignorespaces Operasi Dilasi\relax }}{19}{figure.caption.15}%
+\contentsline {figure}{\numberline {2.6}{\ignorespaces Operasi \textit {Opening}\relax }}{20}{figure.caption.16}%
+\contentsline {figure}{\numberline {2.7}{\ignorespaces Operasi \textit {Closing}\relax }}{20}{figure.caption.17}%
+\contentsline {figure}{\numberline {2.8}{\ignorespaces \textit {Image Downsampling dan Upsampling}\relax }}{21}{figure.caption.18}%
+\contentsline {figure}{\numberline {2.9}{\ignorespaces Piramid Citra\relax }}{21}{figure.caption.19}%
+\contentsline {figure}{\numberline {2.10}{\ignorespaces Hubungan antar komponen dan tepi\relax }}{23}{figure.caption.20}%
+\contentsline {figure}{\numberline {2.11}{\ignorespaces Kondisi \textit {starting point} dari algoritme \textit {border following} untuk tepi luar (a) dan tepi lubang (b)\relax }}{24}{figure.caption.21}%
+\contentsline {figure}{\numberline {2.12}{\ignorespaces Struktur topologi antara tepi satu dengan tepi yang lain jika menggunakan Algoritme 1. Hasil citra (a) dan Struktur yang diekstrak (b)\relax }}{27}{figure.caption.22}%
+\contentsline {figure}{\numberline {2.13}{\ignorespaces Hasil dari algoritme 2. Tanda "\#" merepresentasikan \textit {starting point} dan ":" merepresentasikan nilai $-2$\relax }}{28}{figure.caption.23}%
+\contentsline {figure}{\numberline {2.14}{\ignorespaces Ilustrasi dari proses \textit {merge} dan \textit {split}\relax }}{33}{figure.caption.24}%
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {3.1}{\ignorespaces Diagram alir keseluruhan proses sistem\relax }}{37}{figure.caption.25}%
+\contentsline {figure}{\numberline {3.2}{\ignorespaces Diagram alir proses \textit {Background Subtraction} dengan GMM\relax }}{39}{figure.caption.26}%
+\contentsline {figure}{\numberline {3.3}{\ignorespaces Diagram alir Operasi Morfologi\relax }}{40}{figure.caption.27}%
+\contentsline {figure}{\numberline {3.4}{\ignorespaces Diagram alir proses \textit {Contour Tracing}\relax }}{42}{figure.caption.28}%
+\contentsline {figure}{\numberline {3.5}{\ignorespaces Diagram alir proses pelacakan dengan Kalman Filter\relax }}{45}{figure.caption.29}%
+\contentsline {figure}{\numberline {3.6}{\ignorespaces Contoh keluaran sistem\relax }}{46}{figure.caption.30}%
+\contentsline {figure}{\numberline {3.7}{\ignorespaces Sampel \textit {frame} video dataset \textit {DeepFish} indeks 9908\relax }}{47}{figure.caption.31}%
+\contentsline {figure}{\numberline {3.8}{\ignorespaces Sampel \textit {frame} video dataset \textit {DeepFish} indeks 9866\relax }}{48}{figure.caption.32}%
+\contentsline {figure}{\numberline {3.9}{\ignorespaces Sampel \textit {frame} video dataset \textit {PeRCeiVeLab} indeks gt\textunderscore 124\relax }}{48}{figure.caption.33}%
+\contentsline {figure}{\numberline {3.10}{\ignorespaces Sampel \textit {frame} video dataset \textit {PeRCeiVeLab} indeks gt\textunderscore 116\relax }}{49}{figure.caption.34}%
+\contentsline {figure}{\numberline {3.11}{\ignorespaces Contoh \textit {groundtruth} GMM\relax }}{50}{figure.caption.35}%
+\contentsline {figure}{\numberline {3.12}{\ignorespaces Contoh \textit {groundtruth} \textit {Contour Tracing}\relax }}{52}{figure.caption.36}%
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {4.1}{\ignorespaces Potongan sampel kode input sistem\relax }}{54}{figure.caption.37}%
+\contentsline {figure}{\numberline {4.2}{\ignorespaces Sampel \textit {groundtruth} data uji video indeks (a) 9908 (b) 9866 (c) gt\textunderscore 124 (d) gt\textunderscore 116\relax }}{55}{figure.caption.38}%
+\contentsline {figure}{\numberline {4.3}{\ignorespaces Potongan sampel kode Background Subtraction yang dibantu oleh GMM\relax }}{58}{figure.caption.39}%
+\contentsline {figure}{\numberline {4.4}{\ignorespaces Potongan sampel kode \textit {Background Subtraction} dan Operasi Morfologi\relax }}{65}{figure.caption.40}%
+\contentsline {figure}{\numberline {4.5}{\ignorespaces Potongan sampel kode \textit {Contour Tracing}\relax }}{81}{figure.caption.41}%
+\contentsline {figure}{\numberline {4.6}{\ignorespaces Sample \textit {frame} hasil \textit {tracking Kalman Filter} video indeks 9908\relax }}{82}{figure.caption.42}%
+\contentsline {figure}{\numberline {4.7}{\ignorespaces Sample \textit {frame} hasil \textit {tracking Kalman Filter} video indeks 9866\relax }}{82}{figure.caption.43}%
+\contentsline {figure}{\numberline {4.8}{\ignorespaces Sample \textit {frame} hasil \textit {tracking Kalman Filter} video indeks gt\textunderscore 124\relax }}{83}{figure.caption.44}%
+\contentsline {figure}{\numberline {4.9}{\ignorespaces Sample \textit {frame} hasil \textit {tracking Kalman Filter} video indeks gt\textunderscore 116\relax }}{84}{figure.caption.45}%
+\contentsline {figure}{\numberline {4.10}{\ignorespaces Potongan sampel kode \textit {Kalman Filter}\relax }}{91}{figure.caption.46}%
+\contentsline {figure}{\numberline {4.11}{\ignorespaces Potongan sampel kode \textit {Kalman Filter}\relax }}{92}{figure.caption.47}%
+\addvspace {10\p@ }

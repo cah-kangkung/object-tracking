@@ -1,0 +1,69 @@
+%!TEX root = ./template-skripsi.tex
+%-------------------------------------------------------------------------------
+% 								BAB I
+% 							PENDAHULUAN
+%-------------------------------------------------------------------------------
+
+\chapter{PENDAHULUAN}
+
+\section{Latar Belakang Masalah}
+    Potensi industri perikanan Indonesia merupakan yang terbesar di dunia, baik perikanan tangkap maupun perikanan budidaya. Berdasarkan taktik atau metode produksi, perikanan terbagi menjadi dua yaitu perikanan tangkap \textit{(capture fisheries)} dan perikanan budidaya \textit{(aquaculture)}, dengan potensi produksi lestari sekitar 67 juta ton per tahun. Berdasarkan angka tersebut, maka potensi produksi tangkapan lepas pantai adalah 9,3 juta ton per tahun, dengan potensi tangkapan darat (danau, sungai, waduk,  rawa) sebesar 0,9 ton per tahun. Sisanya 56,8 juta ton per tahun merupakan potensi perikanan budidaya,  baik budidaya laut, budidaya air payau, maupun budidaya air tawar. Budidaya ikan adalah salah satu jenis akuakultur yang melibatkan ikan, yang biasanya dilakukan dalam sebuah tangki tertutup ataupun kolam ikan buatan. Budidaya ikan memiliki berbagai jenis manfaat antara lain adalah, untuk memproduksi atau menghasilkan bahan pangan, sebagai sarana rekreasi dalam bentuk tempat pemancingan ikan, dan juga ikan hias. Di Indonesia sendiri, Badan Pusat Statistik (BPS) mencatat ada lebih dari 1,5 juta usaha budidaya ikan dengan total produksi mencapai 16 juta ton di tahun 2016. Dengan proporsi konsumsi protein yang berasal dari ikan/udang/cumi/kerang mencapai 13,27 persen pada tahun 2019, masih di atas konsumsi daging sebesar 6,54 persen serta konsumsi telur/susu sebesar 5,50 persen.
+
+    Seiring dengan semakin tingginya angka produksi, dibutuhkan segera integrasi penuh Teknologi Informasi terhadap perikanan budidaya, guna meningkatkan efisiensi dan efektivitas dari level produksi hingga penjualan. Salah satu masalah yang sering dihadapi oleh pelaku usaha budidaya ikan adalah pada saat proses penghitungan ikan. Menghitung jumlah ikan diperlukan ketika peternak ingin menjual ikan yang telah mereka budidaya. Pada praktiknya \citep{AlAmri2020}, banyak peternak ikan yang masih menggunakan cara manual dalam proses penghitungan ikan, yaitu dengan cara memindahkan ikan satu persatu dari satu wadah ke wadah lainnya. Cara lainnya adalah dengan memasukkan ikan ke dalam suatu wadah yang kemudian ditimbang beratnya. Kedua cara tersebut tentu sangat tidak efisien dan efektif. Penghitungan ikan secara manual dapat merusak fisik ikan dan sangat tidak hemat waktu, sementara penghitungan ikan dengan menggunakan berat tidaklah selalu akurat.
+    
+    Dari permasalahan di atas, diperlukan sebuah alat yang dapat menghitung jumlah ikan secara otomatis. \cite{Affandy2016} melakukan penelitian terhadap proses penghitungan ikan, yang membuat sebuah \emph{prototype} alat penghitung ikan otomatis dengan menggunakan sensor \emph{infra red}, yaitu dengan cara mengalirkan ikan secara satu persatu melalui sensor tersebut, yang keluarannya kemudian ditampilkan melalui layar LED. Dari penelitian tersebut, didapatkan hasil akhir yang dapat diterima, dengan tingkat kepercayaan sebesar 95\%. Efisiensi waktu juga menjadi lebih baik, untuk setiap 100 ekor bibit ikan mas, dapat dihitung dalam waktu 100 detik yang semula 190 detik. \citet{AlAmri2020} juga melakukan penelitian yang sama. Perbedaannya hanya di sensor yang digunakan, yaitu sensor \emph{proximity}. Dari hasil uji coba didapatkan hasil yang baik, dengan persentase error sebesar 4,07\%. Pengukuran waktu juga tercatat mengalami perubahan yang cukup signifikan dengan perbandingan waktu, 20 menit per 1000 bibit ikan dengan cara manual, dan 228 detik per 1000 bibit ikan dengan menggunakan alat tersebut.
+    
+    Penghitungan ikan menggunakan alat fisik seperti di atas bukan tanpa kekurangan. Walaupun hasil yang dicapai baik, terdapat beberapa poin yang perlu diperhatikan. Hal yang paling utama adalah penelitian tersebut dilakukan dalam kondisi \emph{closed and controlled environment}. Misalnya pada penelitian \citet{AlAmri2020}, modifikasi terhadap lubang keluaran ikan perlu dilakukan jika ingin menghitung ikan dengan ukuran yang berbeda. Dan juga soal sensor \emph{proximity} yang kurang responsif dalam membaca pergerakan ikan jika ikan bergerak terlalu cepat serta saling berdempetan. Lalu ada sensor \emph{infra red} pada penelitian \citet{Affandy2016} yang sangat sensitif terhadap perubahan cahaya dan juga getaran dari luar yang dapat membuat \emph{reading} pada sensor menjadi tidak akurat. Belum lagi biaya yang harus dikeluarkan untuk membeli alat dan juga biaya perawatan jika terdapat sensor yang rusak. Maka dari itu, dibutuhkan sebuah sistem yang lebih fleksibel, mudah digunakan, \emph{robust} terhadap perubahan lingkungan dan \emph{occlusion}, serta membutuhkan biaya yang sangat minim ataupun tidak sama sekali (\emph{zero-cost}).
+    
+    Pelacakan objek (\textit{object tracking}) adalah salah satu bidang penting dalam visi komputer. Salah satu objektifnya adalah untuk menentukan jumlah objek. Dijelaskan dalam \citep{Challa2011}, pelacakan objek mengacu kepada penggunaan sensor (radar, kamera, dan lain-lain) untuk menentukan lokasi, lintasan, atau bahkan karakteristik sebuah objek. Survey yang dilakukan oleh \citep*{Yilmaz2006} mendefinisikan pelacakan objek sebagai tindakan melakukan estimasi atau prediksi terhadap lintasan sebuah objek bergerak pada bidang gambar dalam sebuah adegan video (kamera sebagai sensor). Dengan kata lain, sebuah pelacak \textit{(tracker)} dapat secara konsisten melacak informasi (lokasi) sebuah objek di dalam \textit{frame} selama video berlangsung. Yilmaz juga mengemukakan bahwa terdapat tiga \textit{tasks} penting dalam sistem pelacakan objek: deteksi objek bergerak, pelacakan objek, dan representasi objek. Salah satu tantangan dalam membangun sebuah sistem pelacakan objek adalah menentukan metode deteksi objek yang efisien. Metode yang sering digunakan untuk mengekstrak objek bergerak dari sebuah video adalah \emph{Background Subtraction}. Metode ini melibatkan operasi pengurangan antara \textit{frame} berisi objek yang ingin diekstrak, dengan \emph{background model} \citep{Saravanakumar2010}. \emph{Background model} berisi segala sesuatu yang dapat dianggap sebagai \emph{background}.  Selisih nilai piksel antara keduanya kemudian diekstrak sebagai objek dengan menggunakan teknik \emph{thresholding}. Walaupun teknik \emph{Background Subtraction} sangat populer karena kemudahan implementasinya, teknik ini menjadi sangat buruk performanya ketika \emph{background} yang dimodelkan tidak statik, seperti adanya perubahan iluminasi, pergerakan yang berulang dari suatu objek (dahan pohon yang tertiup angin), atau perubahan bentuk geometri pada \emph{background}.
+    
+    Penggunaan \textit{Gaussian Mixture Model} (GMM) untuk memodelkan \textit{background} pertama kali diperkenalkan oleh \citet{Friedman1997} untuk mendeteksi kendaraan. Metode tersebut mengklasifikasikan seluruh nilai piksel ke dalam tiga distribusi \textit{Gaussian} yang telah ditentukan sebelumnya. Distribusi pertama sebagai warna jalan, distribusi kedua sebagai warna bayangan, dan distribusi ketiga sebagai warna kendaraan. Hasil deteksi objek dari percobaan yang mereka lakukan tampak lebih jernih dan lebih baik dari hasil \textit{Background Subtraction}, akan tetapi metode yang mereka ajukan tidak menjelaskan bagaimana perilaku piksel yang tidak masuk ke dalam tiga distribusi tersebut, karena sebuah piksel bisa saja merepresentasikan lebih dari satu warna selama video berlangsung. \citet{Stauffer1999} menyajikan metode yang lebih sempurna. Tidak seperti metode Friedman yang memodelkan seluruh nilai piksel ke dalam tiga distribusi yang kelasnya sudah ditentukan, Stauffer memodelkan nilai sebuah piksel sebagai \textit{mixture of Gaussians}. Berdasarkan \textit{evidence} dan varians dari masing-masing distribusi Gaussian, dapat ditentukan distribusi mana yang masuk ke dalam kelas \textit{backgorund} dan distribusi mana yang masuk ke dalam kelas \textit{foreground}.
+    
+    Objektif dari sebuah metode pelacakan adalah untuk menghasilkan lintasan dari sebuah objek dengan cara menentukan lokasi objek pada setiap \textit{frame} dalam video. Pada penelitian yang dilakukan oleh \citep{Jeong2014}, setelah proses deteksi objek, Kalman Filter diinisialisasi sebanyak jumlah objek yang terdeteksi (pemberian identitas untuk masing-masing objek).  Kalman Filter pertama kali diperkenalkan oleh R. E. Kalman pada tahun 1960 \citep{Kalman1960}. Secara garis besar, Kalman Filter digunakan untuk memprediksi lokasi objek pada \textit{frame} selanjutnya . Hasil prediksi tersebut kemudian diasosiasikan kembali dengan deteksi objek pada \textit{frame} berikutnya, dengan begitu identitas objek dapat dipertahankan di setiap \textit{frame} selama video berlangsung.
+    
+    Dari permasalahan di atas, penulis mengusulkan untuk melakukan pelacakan pergerakan objek ikan \textit{(fish movement tracking)} menggunakan metode Kalman Filter dengan GMM sebagai metode deteksi objeknya. GMM berguna untuk memodelkan latar belakang yang dinamis, adaptif terhadap perubahan cahaya, pergerakan repetitif (dahan pohon yang tertiup angin), objek yang bergerak lambat, serta dapat melakukan deteksi objek pada \emph{scene} yang berantakan / ramai. Penelitian ini berfokus pada pelacakan lebih dari satu objek ikan menggunakan metode GMM dan Kalman Filter. Hasil yang diharapkan adalah sistem mampu melakukan pelacakan lebih dari satu objek sekaligus secara akurat.
+
+
+
+\section{Rumusan Masalah}
+    Berdasarkan latar belakang masalah yang telah diuraikan, maka perumusan masalah pada penelitian ini adalah "Bagaimana merancang dan membangun sebuah sistem pelacakan pergerakan pada objek ikan menggunakan metode GMM dan Kalman Filter?"
+
+
+\section{Batasan Masalah}
+    Batasan masalah pada penelitian ini adalah:
+    \begin{enumerate}
+        \item \emph{Fish movement tracking} menggunakan metode Kalman Filter dengan GMM sebagai metode deteksi objek bergeraknya.
+        \item Antarmuka sistem berbasis \emph{command-line}.
+        \item Masukan sistem berupa video berisikan ikan.
+        \item Objek selain ikan masih dapat dideteksi.
+        \item Jenis video yang digunakan adalah video dengan format mp4, flv, avi.
+    \end{enumerate}
+
+
+\section{Tujuan Penelitian}
+    Tujuan dari penelitian ini adalah untuk merancang dan membangun sebuah sistem yang dapat melakukan pelacakan pergerakan ikan menggunakan metode GMM dan Kalman Filter, serta menghasilkan keluaran rata-rata objek selama video berlangsung.
+
+
+\section{Manfaat Penelitian}
+    Beberapa manfaat yang ingin diperoleh dari penelitian ini adalah sebagai berikut:
+    \begin{enumerate}[listparindent=0.7cm]
+        \item Bagi Peneliti
+        
+        Menambah pengetahuan penulis tentang penggunaan metode GMM dan Kalman Filter untuk melakukan \emph{tracking} pergerakan ikan.
+        
+        \item Bagi Peneliti Selanjutnya
+        
+        Diharapkan metode yang diusulkan pada penelitian ini dapat membantu penelitian selanjutnya dalam mengembangkan sistem yang lebih kompleks dan bermanfaat, yaitu sistem penghitungan ikan.
+        
+        \item Bagi Program Studi Ilmu Komputer
+        
+        Penelitian \emph{"Fish Movement Tracking} menggunakan metode GMM dan Kalman Filter" ini dapat dijadikan sebagai referensi serta menambah wawasan masyarakat Program Studi Ilmu Komputer Universitas Negeri Jakarta.
+    \end{enumerate}
+
+
+% Baris ini digunakan untuk membantu dalam melakukan sitasi
+% Karena diapit dengan comment, maka baris ini akan diabaikan
+% oleh compiler LaTeX.
+\begin{comment}
+\bibliography{collection}
+\end{comment}

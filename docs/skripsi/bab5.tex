@@ -1,0 +1,41 @@
+%!TEX root = ./template-skripsi.tex
+%-------------------------------------------------------------------------------
+%                            	BAB V
+%               			PENUTUP
+%-------------------------------------------------------------------------------
+
+\chapter{PENUTUP}
+
+	\section{Kesimpulan}
+		Penelitian \textit{Fish Movement Tracking} Menggunakan Metode GMM dan \textit{Kalman Filter} secara garis besar dimulai dari proses \textit{input} data ke dalam sistem. Data kemudian diubah kedalam bentuk citra (\textit{frame}) yang dilanjutkan oleh proses \textit{pre-processing}, yaitu mengkonversi ruang warna citra dari RGB \textit{grayscale}. Lalu, citra dimasukkan sebegai \textit{input} metode \textit{background subtraction} dengan bantuan GMM untuk memodelkan latar belakang. Proses ekstraksi latar depan kemudian dilakukan terhadap model latar belakang yang sudah dihasilkan. Setelah itu, keluaran dari metode sebelumnya disempurnakan oleh Operasi Morfologi untuk mengeliminasi \textit{noise} secara lebih agresif. Teknik \textit{downsampling} kemudian dilakukan, proses ini akan meningkatkan performa metode selanjutnya yaitu \textit{Contour Tracing} untuk menghasilkan tepi dari masing-masing objek yang berhasil dideteksi. Terakhir adalah proses prediksi dan juga \textit{assigment} masing-masing objek prediksi dengan objek deteksi. Proses ini akan menghasilkan citra original yang seluruh objeknya sudah mempunyai \textit{bounding box} dan labelnya masing-masing. Dari hasil metode KF inilah yang kemudian dapat menghasilkan rata-rata jumlah objek selama video berlangsung.
+		
+		Dari hasil perancangan, implementasi, serta uji coba sistem \textit{Fish Movement Tracking} Menggunakan Metode GMM dan \textit{Kalman Filter} diperoleh kesimpulan sebagai berikut:
+
+		\begin{enumerate}
+			\item Sistem mampu melakukan pelacakan dengan lebih baik seiring dengan bertambahnya jumlah \textit{frame} yang diproses.
+			
+			\item Sistem mampu melakukan pelacakan dengan cukup baik menggunakan parameter \textit{structuring element} ukuran $7 \times 13$ dan \textit{downsampling} sebesar $x8$.
+			
+			\item Pada dataset video indeks 9908 dan 9866 (objek tunggal), sistem pada akhirnya dapat menghasilkan rata-rata jumlah objek yang jauh dari rata-rata sebenarnya. Hal ini dikarenakan dataset yang digunakan kurang optimal pada video indeks 9908, serta gagalnya proses deteksi dan \textit{noise removal} pada video indeks 9866.
+			
+			\item Pada dataset video indeks gt\textunderscore124 dan gt\textunderscore116 (objek lebih dari satu), sistem pada akhirnya dapat menghasilkan rata-rata jumlah objek yang mendekati rata-rata sebenarnya.
+		\end{enumerate}
+	
+	\section{Saran}
+		Adapun beberapa saran yang dapat penulis sampaikan untuk penelitian {\tiny }selanjutnya adalah: 
+		\begin{enumerate}
+			\item Penelitian ini belum dapat membedakan objek ikan dengan objek bergerak lainnya. Maka dari itu, perlu adanya pengembangan lanjutan yang menyempurnakan proses deteksi objek dengan metode yang lebih kompleks seperti \textit{Neural-Network}, sehingga sistem dapat membedakan objek ikan dengan objek lainnya dengan baik.
+			
+			\item Proses asosiasi data dapat ditingkatkan \textit{cost function}-nya. Selain ukuran dan posisi, funngsi tersebut dapat ditambahkan variabel lain seperti warna.
+			
+			\item Penelitian ini dapat digunakan untuk menguji objek selain ikan.
+		\end{enumerate}
+
+	
+% Baris ini digunakan untuk membantu dalam melakukan sitasi
+% Karena diapit dengan comment, maka baris ini akan diabaikan
+% oleh compiler LaTeX.
+
+\begin{comment}
+\bibliography{collection}
+\end{comment}

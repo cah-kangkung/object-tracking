@@ -1,0 +1,56 @@
+This is BibTeX, Version 0.99d (TeX Live 2022)
+Capacity: max_strings=200000, hash_size=200000, hash_prime=170003
+The top-level auxiliary file: main.aux
+The style file: UNNESapa.bst
+A level-1 auxiliary file: bab1.aux
+A level-1 auxiliary file: bab2.aux
+A level-1 auxiliary file: bab3.aux
+A level-1 auxiliary file: bab4.aux
+A level-1 auxiliary file: bab5.aux
+new.coma is an unknown function---line 563 of file UNNESapa.bst
+new.colon is an unknown function---line 758 of file UNNESapa.bst
+Database file #1: skripsi.bib
+Warning--empty school in Affandy2016
+Warning--empty school in AlAmri2020
+You've used 31 entries,
+            1985 wiz_defined-function locations,
+            664 strings with 9226 characters,
+and the built_in function-call counts, 10188 in all, are:
+= -- 960
+> -- 448
+< -- 21
++ -- 164
+- -- 146
+* -- 828
+:= -- 1895
+add.period$ -- 99
+call.type$ -- 31
+change.case$ -- 222
+chr.to.int$ -- 29
+cite$ -- 33
+duplicate$ -- 411
+empty$ -- 642
+format.name$ -- 199
+if$ -- 1895
+int.to.chr$ -- 3
+int.to.str$ -- 0
+missing$ -- 30
+newline$ -- 164
+num.names$ -- 93
+pop$ -- 206
+preamble$ -- 1
+purify$ -- 228
+quote$ -- 0
+skip$ -- 322
+stack$ -- 0
+substring$ -- 415
+swap$ -- 58
+text.length$ -- 0
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 176
+warning$ -- 2
+while$ -- 64
+width$ -- 0
+write$ -- 403
+(There were 2 error messages)
