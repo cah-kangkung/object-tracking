@@ -162,6 +162,9 @@ datasets/
 screenshots/
 groundtruth/
 generate_result.sh
+code_snapper.py
+video_writter.py
+xml_parser.py
 
 # PyCharm
 #  JetBrains specific template is maintained in a separate JetBrains.gitignore that can
